@@ -1,0 +1,59 @@
+@* @model ItemViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div>
+    <form class="shadow p-3 mb-5 bg-white rounded" enctype="multipart/form-data" method="post" asp-controller="Item" asp-action="Update">
+        <h2 class="FoodTown-Green-Background" style="width:100%;">Actualizar Itemo <img style="height:5%; width:5%;" src="~/images/Icon/EditIcon.png" /></h2>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="text-danger" asp-validation-summary="All"></div>
+
+        <input type="hidden" asp-for="ItemId" />
+        <input type="hidden" asp-for="ImageName" />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" class="form-control" asp-for="Name" placeholder="Cereal, Ice cream, Tuna, etc...">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price"></label>
+            <input type="text" class="form-control" asp-for="Price" placeholder="5.00 , 23.5 , 50.23">
+            <span class="text-danger" asp-validation-for="Price"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BrandId"></label>
+            <select asp-for="BrandId" asp-items="@Model.Brands" class="custom-select">
+            </select>
+            <span class="text-danger" asp-validation-for="BrandId"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="File"></label>
+            <input type="file" class="form-control-file" asp-for="File" accept=".png,.jpg,.jpeg" value="">
+            <span class="text-danger" asp-validation-for="File"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" asp-items="@Model.Categories" class="custom-select">
+            </select>
+            <span class="text-danger" asp-validation-for="CategoryId"></span>
+        </div>
+
+        <label>Subcategories</label>
+        <div id="subcategories">
+        </div>
+        <button class="btn btn-success" style="background-color:#97d42b; border:0;" type="submit">Save Changes</button>
+        <a class="btn btn-danger" asp-controller="Item" asp-action="List">Cancel</a>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/Item/Updatev2.js"></script>
+} *@
