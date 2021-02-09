@@ -30,10 +30,10 @@ namespace Web
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContextPool<FoodTownDbContext>(options =>
+            services.AddDbContextPool<RealStateDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Standard")));
 
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<FoodTownDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<RealStateDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
                 //add this option to identity configuration
@@ -41,17 +41,16 @@ namespace Web
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IGenericRepository<Brand>, GenericRepository<Brand>>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<IGenericService<Brand>, GenericService<Brand>>();
-            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IGenericRepository<House>, HouseRepository>();
+            services.AddScoped<IHouseService, HouseServiceX>();
 
-            services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
-            services.AddScoped<IGenericService<Category>, GenericService<Category>>();
+            services.AddScoped<IGenericRepository<Province>, GenericRepository<Province>>();
+            services.AddScoped<IGenericService<Province>, GenericService<Province>>();
 
-            services.AddScoped<IGenericRepository<Item>, ItemRepository>();
+            services.AddScoped<IGenericRepository<Feature>, GenericRepository<Feature>>();
+            services.AddScoped<IGenericService<Feature>, GenericService<Feature>>();
+            // // services.AddScoped<IGenericRepository<Item>, ItemRepository>();
             services.AddScoped<IFileService, FileService>();
-            services.AddScoped<IItemService, ItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,7 +79,7 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     // pattern: "{controller=Item}/{action=List}/{id?}");
-                    pattern: "{controller=Item}/{action=List}/{id?}");
+                    pattern: "{controller=House}/{action=List}/{id?}");
             });
         }
     }

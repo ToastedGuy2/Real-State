@@ -20,27 +20,27 @@ let showPopUp = () => {
         modalBody.innerHTML = partialView;
         $.validator.unobtrusive.parse("#addForm");
         let categorySelect = document.getElementById("CategoryId");
-        let refreshBrands = evt => {
-            let brandSelect = document.getElementById("BrandId");
+        let refreshServices = evt => {
+            let ServiceSelect = document.getElementById("ServiceId");
             let categoryIdSelected = categorySelect.value;
-            let url = `/api/${categoryIdSelected}/Brand`;
+            let url = `/api/${categoryIdSelected}/Service`;
             let httpMethod = "GET";
             let xhr = new XMLHttpRequest();
             xhr.open(httpMethod, url);
             xhr.onload = () => {
-                brandSelect.innerHTML = "";
-                let brands = JSON.parse(xhr.response);
-                for (let index = 0; index < brands.length; index++) {
-                    const brand = brands[index];
+                ServiceSelect.innerHTML = "";
+                let Services = JSON.parse(xhr.response);
+                for (let index = 0; index < Services.length; index++) {
+                    const Service = Services[index];
                     let option = document.createElement('option');
-                    option.setAttribute('value', brand.id);
-                    option.appendChild(document.createTextNode(brand.name));
-                    brandSelect.appendChild(option);
+                    option.setAttribute('value', Service.id);
+                    option.appendChild(document.createTextNode(Service.name));
+                    ServiceSelect.appendChild(option);
                 }
             }
             xhr.send();
         }
-        categorySelect.addEventListener("change", refreshBrands);
+        categorySelect.addEventListener("change", refreshServices);
         let submitForm = document.getElementById("addForm")
         submitForm.addEventListener("submit", formSubmit);
     }
@@ -77,12 +77,12 @@ let formSubmit = e => {
                         priceTd.textContent = item.price;
                         let categoryTd = document.createElement("td");
                         categoryTd.textContent = item.category;
-                        let brandTd = document.createElement("td");
-                        brandTd.textContent = item.brand;
+                        let ServiceTd = document.createElement("td");
+                        ServiceTd.textContent = item.Service;
                         row.appendChild(nameTd);
                         row.appendChild(priceTd);
                         row.appendChild(categoryTd);
-                        row.appendChild(brandTd);
+                        row.appendChild(ServiceTd);
                         tableBody.appendChild(row);
                     }
                 }

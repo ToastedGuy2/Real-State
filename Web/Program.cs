@@ -18,7 +18,7 @@ namespace Web
             {
                 try
                 {
-                    var context = scope.ServiceProvider.GetService<FoodTownDbContext>();
+                    var context = scope.ServiceProvider.GetService<RealStateDbContext>();
                     // for demo purposes, delete the database & migrate on startup so 
                     // we can start with a clean slate
                     context.Database.EnsureDeleted();

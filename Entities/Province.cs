@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-    [Table("AppUserRole")]
-    public class AppUserRole
+    [Table("Province")]
+    public class Province
     {
         [Key]
-        public int AppUserRoleId { get; set; }
+        public int ProvinceId { get; set; }
         [Required]
         public string Name { get; set; }
-        public ICollection<AppUser> Users { get; set; } = new List<AppUser>();
+        public ICollection<House> Houses { get; set; } = new List<House>();
     }
 }

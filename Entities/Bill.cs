@@ -10,24 +10,32 @@ namespace Entities
     {
         [Key]
         public int BillId { get; set; }
-        [ForeignKey("Id")]
         [Required]
+        [ForeignKey("Id")]
         public string CustomerId { get; set; }
         [ForeignKey("Id")]
         public AppUser Customer { get; set; }
         [Required]
-        public DateTimeOffset Date { get; set; }
+        public int HouseId { get; set; }
+        [ForeignKey("HouseId")]
+        public House House { get; set; }
         [Required]
-        public int CreditCardId { get; set; }
-        [ForeignKey("CreditCardId")]
-        public CreditCard CreditCard { get; set; }
+        public DateTimeOffset StartDate { get; set; }
         [Required]
-        public int AddressId { get; set; }
-        [ForeignKey("AddressId")]
-        public Address DeliveryAddress { get; set; }
-        public IEnumerable<BillItem> Items { get; set; }
+        public int Months { get; set; }
+        [Required]
+        public DateTimeOffset EndDate { get; set; }
+        [Required]
         public double SubTotal { get; set; }
+        [Required]
+        public ICollection<BillService> Services { get; set; } = new List<BillService>();
+        [Required]
         public double Iva { get; set; }
+        [Required]
         public double Total { get; set; }
+        [Required]
+        public int PaymentMethodId { get; set; }
+        [ForeignKey("PaymentMethodId")]
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

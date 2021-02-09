@@ -10,7 +10,7 @@ namespace Repositories.Generic
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public FoodTownDbContext _context;
+        public RealStateDbContext _context;
         public DbSet<T> _table;
         // private readonly ILogger _logger;
 
@@ -20,7 +20,7 @@ namespace Repositories.Generic
         //     this._logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         //     this._table = _context.Set<T>();
         // }
-        public GenericRepository(FoodTownDbContext context)
+        public GenericRepository(RealStateDbContext context)
         {
             this._context = context ?? throw new ArgumentNullException(nameof(context));
             this._table = _context.Set<T>();
