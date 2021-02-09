@@ -1,0 +1,47 @@
+@model IEnumerable<Entities.House>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-home"></i></span> Houses</h1>
+
+<p>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province)
+            </th>
+            <th> <a class="btn btn-success" asp-action="Create"><i class="fas fa-plus"></i> Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var house in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => house.Name)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => house.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => house.Province.Name)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@house.HouseId"><i class="far fa-edit"></i>
+                        Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

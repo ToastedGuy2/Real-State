@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/obj": true,
+        "**/bin": true,
+        "**/*.sln": true,
+        "**/*.gitignore": true,
+        "LICENSE": true,
+        "README.md": true
+    }
+}
