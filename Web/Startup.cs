@@ -41,7 +41,7 @@ namespace Web
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IGenericRepository<House>, HouseRepository>();
+            services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IHouseService, HouseServiceX>();
 
             services.AddScoped<IGenericRepository<Province>, GenericRepository<Province>>();
@@ -79,7 +79,8 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     // pattern: "{controller=Item}/{action=List}/{id?}");
-                    pattern: "{controller=House}/{action=List}/{id?}");
+                    // pattern: "{controller=House}/{action=Edit}/{id=1}");
+                    pattern: "{controller=House}/{action=List}/{id=1}");
             });
         }
     }

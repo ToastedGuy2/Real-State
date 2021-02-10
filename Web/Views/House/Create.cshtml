@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-4 mx-auto">
         <form asp-action="Create" enctype="multipart/form-data">
-            <h1 class="mt-3"><span class="primary-color"><i class="fas fa-home"></i></span> Houses</h1>
+            <h1 class="mt-3"> <span class="text-success"><i class="fas fa-plus"></i></span> Add a <span class="primary-color"><i class="fas fa-home"></i></span> House</h1>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label><span class="text-danger">*</span>
@@ -16,7 +16,7 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <label asp-for="Price"></label><span class="text-danger">*</span>
-            <div class="input-group">
+            <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
                 <input asp-for="Price" class="form-control" placeholder="1 , 23.5 , 50.23">
             </div>
@@ -71,6 +71,7 @@
     </div>
 </div>
 @section Scripts{
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -51,7 +51,7 @@ namespace Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(AddHouseViewModel model, IEnumerable<int> features)
+        public IActionResult Create([Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] AddHouseViewModel model, IEnumerable<int> features)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +63,7 @@ namespace Web.Controllers
                 }
                 _houseService.Insert(house, model.ImageUploaded);
                 _houseService.Save();
+                TempData["TransactionCompleted"] = "House added Sucessfully";
                 return RedirectToAction(nameof(List));
             }
 
@@ -71,62 +72,53 @@ namespace Web.Controllers
             return View(model);
         }
 
-        // // GET: House/Edit/5
-        // public async Task<IActionResult> Edit(int? id)
-        // {
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     var house = await _context.Houses.FindAsync(id);
-        //     if (house == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "Name", house.ProvinceId);
-        //     return View(house);
-        // }
+        // GET: House/Edit/5
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var house = _houseService.GetById(id.Value);
+            if (house == null)
+            {
+                return NotFound();
+            }
+            var model = _autoMapper.Map<UpdateHouseViewModel>(house);
+            model.Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name");
+            model.Features = _featureService.GetAll();
+            model.SelectedFeatures = house.Features;
+            return View(model);
+        }
 
         // // POST: House/Edit/5
         // // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> Edit(int id, [Bind("HouseId,Name,Price,Description,Bathrooms,Bedrooms,Size,IsItAvailable,ProvinceId,ImageName")] House house)
-        // {
-        //     if (id != house.HouseId)
-        //     {
-        //         return NotFound();
-        //     }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features)
+        {
+            if (id != model.HouseId)
+            {
+                return NotFound();
+            }
 
-        //     if (ModelState.IsValid)
-        //     {
-        //         try
-        //         {
-        //             _context.Update(house);
-        //             await _context.SaveChangesAsync();
-        //         }
-        //         catch (DbUpdateConcurrencyException)
-        //         {
-        //             if (!HouseExists(house.HouseId))
-        //             {
-        //                 return NotFound();
-        //             }
-        //             else
-        //             {
-        //                 throw;
-        //             }
-        //         }
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     ViewData["ProvinceId"] = new SelectList(_context.Provinces, "ProvinceId", "Name", house.ProvinceId);
-        //     return View(house);
-        // }
-
-        // private bool HouseExists(int id)
-        // {
-        //     return _context.Houses.Any(e => e.HouseId == id);
-        // }
+            if (ModelState.IsValid)
+            {
+                var house = _autoMapper.Map<House>(model);
+                foreach (var featureId in features)
+                {
+                    house.Features.Add(new HouseFeature() { HouseId = model.HouseId, FeatureId = featureId });
+                }
+                _houseService.Update(house, model.ImageUploaded);
+                _houseService.Save();
+                TempData["TransactionCompleted"] = "House edited Sucessfully";
+                return RedirectToAction(nameof(List));
+            }
+            model.Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name", model.ProvinceId);
+            model.Features = _featureService.GetAll();
+            model.SelectedFeatures = features.Select(id => new HouseFeature() { FeatureId = id });
+            return View(model);
+        }
     }
 }

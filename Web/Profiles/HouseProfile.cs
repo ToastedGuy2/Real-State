@@ -9,7 +9,8 @@ namespace Web.Profiles
         public HouseProfile()
         {
             CreateMap<AddHouseViewModel, House>();
-            // CreateMap<Item, ItemDto>().ForMember(itemDto => itemDto.Id, opt => opt.MapFrom(src => src.ItemId));
+            CreateMap<House, UpdateHouseViewModel>().ForMember(dest => dest.Features, source => source.Ignore()).ReverseMap();
+
         }
     }
 }

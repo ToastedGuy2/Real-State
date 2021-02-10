@@ -11,5 +11,6 @@ namespace Services
         House GetById(int id);
         IEnumerable<House> GetAll();
         void Save();
+        bool HouseExists(int houseId);
     }
 }
