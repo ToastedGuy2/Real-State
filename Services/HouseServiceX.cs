@@ -10,10 +10,10 @@ namespace Services
     public class HouseServiceX : IHouseService
     {
 
-        private readonly IGenericRepository<House> _houseRepository;
+        private readonly IHouseRepository _houseRepository;
         private readonly IFileService _fileService;
 
-        public HouseServiceX(IGenericRepository<House> houseRepository, IFileService fileService)
+        public HouseServiceX(IHouseRepository houseRepository, IFileService fileService)
         {
             this._houseRepository = houseRepository ?? throw new ArgumentNullException(nameof(houseRepository));
             this._fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
@@ -36,14 +36,22 @@ namespace Services
 
         }
 
-
         public void Update(House house, IFormFile image)
         {
-            throw new System.NotImplementedException();
+            if (image != null)
+            {
+                house.ImageName = _fileService.UploadImage(image);
+            }
+            _houseRepository.Update(house);
         }
         public void Save()
         {
             _houseRepository.Save();
+        }
+
+        public bool HouseExists(int houseId)
+        {
+            return _houseRepository.HouseExists(houseId);
         }
     }
 }

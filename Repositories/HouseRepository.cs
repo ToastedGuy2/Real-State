@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
@@ -7,10 +8,24 @@ using Repositories.Generic;
 
 namespace Repositories
 {
-    public class HouseRepository : GenericRepository<House>, IGenericRepository<House>
+    public class HouseRepository : GenericRepository<House>, IHouseRepository
     {
         public HouseRepository(RealStateDbContext context) : base(context)
         {
+        }
+        public override void Update(House obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+            var houseFeaturesToDelete = _context.HouseFeatures.Where(hF => hF.HouseId == obj.HouseId).ToList();
+            _context.HouseFeatures.RemoveRange(houseFeaturesToDelete);
+            // Save();
+            _context.HouseFeatures.AddRange(obj.Features);
+            // Save();
+            obj.Features = null;
+            base.Update(obj);
         }
         public override IEnumerable<House> GetAll()
         {
@@ -22,11 +37,17 @@ namespace Repositories
             return GetAllEagerLoading().
                    FirstOrDefault(h => h.HouseId == ((int)id));
         }
+
+        public bool HouseExists(int houseId)
+        {
+            return _context.Houses.Any(h => h.HouseId == houseId);
+        }
+
         private IQueryable<House> GetAllEagerLoading()
         {
             return _context.Houses.
             Include(h => h.Province).
-            Include(h => h.Features).OrderBy(i => i.Name);
+            Include(h => h.Features).OrderBy(h => h.Name);
         }
     }
 }

@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@section CSS{
+    <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
+}
 <h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-home"></i></span> Houses</h1>
 
-<p>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -45,3 +45,31 @@
         }
     </tbody>
 </table>
+@section Scripts{
+    <script src="~/lib/notyf/notyf.min.js"></script>
+            @if(TempData["TransactionCompleted"]!=null){
+                <script src="~/js/House/showNotification.js"></script>
+                }
+                    @* <script>
+                        const notyf = new Notyf({
+                    position: {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.success("Hello");
+            </script>
+            @if(TempData["TransactionCompleted"]!=null){
+            <script>
+                        const notyf = new Notyf({
+                    position: {
+                        x: 'right',
+                        y: 'top',
+                    }
+                });
+                notyf.success(@((string) TempData["TransactionCompleted"]));
+            </script> *@
+    }
+
+
+}
