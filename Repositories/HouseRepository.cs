@@ -25,6 +25,12 @@ namespace Repositories
             _context.HouseFeatures.AddRange(obj.Features);
             // Save();
             obj.Features = null;
+            var houseServicesToDelete = _context.HouseServices.Where(hS => hS.HouseId == obj.HouseId).ToList();
+            _context.HouseServices.RemoveRange(houseServicesToDelete);
+            // Save();
+            _context.HouseServices.AddRange(obj.Services);
+            // Save();
+            obj.Services = null;
             base.Update(obj);
         }
         public override IEnumerable<House> GetAll()
@@ -47,7 +53,9 @@ namespace Repositories
         {
             return _context.Houses.
             Include(h => h.Province).
-            Include(h => h.Features).OrderBy(h => h.Name);
+            Include(h => h.Features).
+            Include(h => h.Services).
+            OrderBy(h => h.Name);
         }
     }
 }

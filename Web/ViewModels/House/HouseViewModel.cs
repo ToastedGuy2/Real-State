@@ -31,5 +31,8 @@ namespace Web.ViewModels.House
         [Required]
         public string Description { get; set; }
         public IEnumerable<Feature> Features { get; set; } = new List<Feature>();
+        public IEnumerable<HouseFeature> SelectedFeatures { get; set; } = new List<HouseFeature>();
+        public IEnumerable<Service> Services { get; set; } = new List<Service>();
+        public IEnumerable<HouseService> SelectedServices { get; set; } = new List<HouseService>();
     }
 }

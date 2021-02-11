@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repositories.Migrations
 {
-    public partial class Base : Migration
+    public partial class SeedServicesData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,7 +80,8 @@ namespace Repositories.Migrations
                     ServiceId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Price = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -322,15 +323,15 @@ namespace Repositories.Migrations
                 {
                     table.PrimaryKey("PK_HouseService", x => new { x.HouseId, x.ServiceId });
                     table.ForeignKey(
-                        name: "FK_HouseService_Service_HouseId",
+                        name: "FK_HouseService_House_HouseId",
                         column: x => x.HouseId,
-                        principalTable: "Service",
-                        principalColumn: "ServiceId");
-                    table.ForeignKey(
-                        name: "FK_HouseService_House_ServiceId",
-                        column: x => x.ServiceId,
                         principalTable: "House",
                         principalColumn: "HouseId");
+                    table.ForeignKey(
+                        name: "FK_HouseService_Service_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Service",
+                        principalColumn: "ServiceId");
                 });
 
             migrationBuilder.CreateTable(
@@ -373,13 +374,25 @@ namespace Repositories.Migrations
                 columns: new[] { "ProvinceId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "San Jose" },
-                    { 2, "Alajuela" },
-                    { 3, "Heredia" },
-                    { 4, "Cartago" },
-                    { 5, "Guanacaste" },
+                    { 7, "Puntarenas" },
                     { 6, "Limon" },
-                    { 7, "Puntarenas" }
+                    { 5, "Guanacaste" },
+                    { 3, "Heredia" },
+                    { 2, "Alajuela" },
+                    { 1, "San Jose" },
+                    { 4, "Cartago" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Service",
+                columns: new[] { "ServiceId", "Description", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 4, "lorem ipsum", "House Insurance", 30.0 },
+                    { 1, "lorem ipsum", "Surveillance 24/7", 30.0 },
+                    { 2, "lorem ipsum", "Swimming Pool Maintenance", 13.0 },
+                    { 3, "lorem ipsum", "Garden..", 25.0 },
+                    { 5, "lorem ipsum", "Solar Panels", 9.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -402,32 +415,63 @@ namespace Repositories.Migrations
                 values: new object[,]
                 {
                     { 1, 1 },
-                    { 7, 4 },
-                    { 7, 3 },
-                    { 7, 2 },
-                    { 7, 1 },
-                    { 6, 6 },
-                    { 6, 5 },
                     { 6, 4 },
                     { 6, 3 },
                     { 6, 2 },
                     { 6, 1 },
                     { 5, 6 },
-                    { 7, 5 },
                     { 5, 5 },
+                    { 5, 4 },
                     { 5, 3 },
                     { 5, 2 },
                     { 5, 1 },
+                    { 6, 5 },
+                    { 7, 2 },
+                    { 7, 3 },
+                    { 7, 1 },
                     { 4, 6 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 2 },
+                    { 7, 4 },
+                    { 3, 2 },
+                    { 6, 6 },
+                    { 7, 6 },
+                    { 7, 5 },
+                    { 4, 2 },
+                    { 4, 3 },
+                    { 3, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "HouseService",
+                columns: new[] { "HouseId", "ServiceId" },
+                values: new object[,]
+                {
+                    { 7, 1 },
+                    { 7, 2 },
+                    { 6, 4 },
+                    { 6, 3 },
+                    { 6, 2 },
+                    { 6, 1 },
+                    { 7, 3 },
+                    { 6, 5 },
+                    { 5, 2 },
+                    { 5, 4 },
+                    { 5, 3 },
+                    { 7, 4 },
+                    { 5, 1 },
+                    { 4, 4 },
                     { 4, 3 },
                     { 4, 2 },
+                    { 4, 1 },
                     { 3, 3 },
                     { 3, 2 },
-                    { 2, 2 },
+                    { 3, 1 },
+                    { 2, 4 },
                     { 1, 3 },
-                    { 1, 2 },
-                    { 5, 4 },
-                    { 7, 6 }
+                    { 5, 5 },
+                    { 7, 5 }
                 });
 
             migrationBuilder.CreateIndex(

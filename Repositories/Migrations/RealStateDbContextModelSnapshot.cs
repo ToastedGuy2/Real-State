@@ -15,7 +15,7 @@ namespace Repositories.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -522,6 +522,128 @@ namespace Repositories.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("HouseService");
+
+                    b.HasData(
+                        new
+                        {
+                            HouseId = 1,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 2,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            HouseId = 3,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            HouseId = 3,
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            HouseId = 3,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 4,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            HouseId = 4,
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            HouseId = 4,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 4,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            HouseId = 5,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            HouseId = 5,
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            HouseId = 5,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 5,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            HouseId = 5,
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            HouseId = 6,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            HouseId = 6,
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            HouseId = 6,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 6,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            HouseId = 6,
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            HouseId = 7,
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            HouseId = 7,
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            HouseId = 7,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            HouseId = 7,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            HouseId = 7,
+                            ServiceId = 5
+                        });
                 });
 
             modelBuilder.Entity("Entities.PaymentMethod", b =>
@@ -600,6 +722,10 @@ namespace Repositories.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -610,6 +736,43 @@ namespace Repositories.Migrations
                     b.HasKey("ServiceId");
 
                     b.ToTable("Service");
+
+                    b.HasData(
+                        new
+                        {
+                            ServiceId = 1,
+                            Description = "lorem ipsum",
+                            Name = "Surveillance 24/7",
+                            Price = 30.0
+                        },
+                        new
+                        {
+                            ServiceId = 2,
+                            Description = "lorem ipsum",
+                            Name = "Swimming Pool Maintenance",
+                            Price = 13.0
+                        },
+                        new
+                        {
+                            ServiceId = 3,
+                            Description = "lorem ipsum",
+                            Name = "Garden..",
+                            Price = 25.0
+                        },
+                        new
+                        {
+                            ServiceId = 4,
+                            Description = "lorem ipsum",
+                            Name = "House Insurance",
+                            Price = 30.0
+                        },
+                        new
+                        {
+                            ServiceId = 5,
+                            Description = "lorem ipsum",
+                            Name = "Solar Panels",
+                            Price = 9.0
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -814,14 +977,14 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Entities.HouseService", b =>
                 {
-                    b.HasOne("Entities.Service", "Service")
-                        .WithMany("Houses")
+                    b.HasOne("Entities.House", "House")
+                        .WithMany("Services")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Entities.House", "House")
-                        .WithMany("Services")
+                    b.HasOne("Entities.Service", "Service")
+                        .WithMany("Houses")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
