@@ -13,6 +13,8 @@ namespace Entities
         public string Name { get; set; }
         [Required]
         public double Price { get; set; }
+        [Required]
+        public string Description { get; set; }
         public ICollection<BillService> Bills { get; set; } = new List<BillService>();
         public ICollection<HouseService> Houses { get; set; } = new List<HouseService>();
     }

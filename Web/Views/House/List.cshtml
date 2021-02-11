@@ -50,6 +50,10 @@
             @if(TempData["TransactionCompleted"]!=null){
                 <script src="~/js/House/showNotification.js"></script>
                 }
+
+    }
+
+
                     @* <script>
                         const notyf = new Notyf({
                     position: {
@@ -69,7 +73,3 @@
                 });
                 notyf.success(@((string) TempData["TransactionCompleted"]));
             </script> *@
-    }
-
-
-}

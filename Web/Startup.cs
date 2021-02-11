@@ -51,6 +51,9 @@ namespace Web
             services.AddScoped<IGenericService<Feature>, GenericService<Feature>>();
             // // services.AddScoped<IGenericRepository<Item>, ItemRepository>();
             services.AddScoped<IFileService, FileService>();
+
+            services.AddScoped<IGenericRepository<Service>, GenericRepository<Service>>();
+            services.AddScoped<IGenericService<Service>, GenericService<Service>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,7 +83,7 @@ namespace Web
                     name: "default",
                     // pattern: "{controller=Item}/{action=List}/{id?}");
                     // pattern: "{controller=House}/{action=Edit}/{id=1}");
-                    pattern: "{controller=House}/{action=List}/{id=1}");
+                    pattern: "{controller=House}/{action=Edit}/{id=1}");
             });
         }
     }

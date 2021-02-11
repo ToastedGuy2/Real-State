@@ -20,13 +20,15 @@ namespace Web.Controllers
         private readonly IGenericService<Province> _provinceService;
         private readonly IGenericService<Feature> _featureService;
         private readonly IMapper _autoMapper;
+        private readonly IGenericService<Service> _servicexService;
 
-        public HouseController(IHouseService houseService, IGenericService<Province> provinceService, IGenericService<Feature> featureService, IMapper autoMapper)
+        public HouseController(IHouseService houseService, IGenericService<Province> provinceService, IGenericService<Feature> featureService, IMapper autoMapper, IGenericService<Service> servicexService)
         {
             this._houseService = houseService;
             this._provinceService = provinceService;
             this._featureService = featureService;
             this._autoMapper = autoMapper;
+            this._servicexService = servicexService;
         }
 
         // GET: House
@@ -41,7 +43,8 @@ namespace Web.Controllers
             var model = new AddHouseViewModel()
             {
                 Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name"),
-                Features = _featureService.GetAll()
+                Features = _featureService.GetAll(),
+                Services = _servicexService.GetAll()
             };
             return View(model);
         }
@@ -51,7 +54,7 @@ namespace Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] AddHouseViewModel model, IEnumerable<int> features)
+        public IActionResult Create([Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] AddHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,11 @@ namespace Web.Controllers
                 {
                     house.Features.Add(new HouseFeature() { FeatureId = id });
                 }
+                var houseServices = services.Select(id => new HouseService() { ServiceId = id });
+                foreach (var id in services)
+                {
+                    house.Services.Add(new HouseService() { ServiceId = id });
+                }
                 _houseService.Insert(house, model.ImageUploaded);
                 _houseService.Save();
                 TempData["TransactionCompleted"] = "House added Sucessfully";
@@ -69,6 +77,9 @@ namespace Web.Controllers
 
             model.Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name");
             model.Features = _featureService.GetAll();
+            model.SelectedFeatures = features.Select(id => new HouseFeature() { FeatureId = id });
+            model.Services = _servicexService.GetAll();
+            model.SelectedServices = services.Select(id => new HouseService() { ServiceId = id });
             return View(model);
         }
 
@@ -88,6 +99,8 @@ namespace Web.Controllers
             model.Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name");
             model.Features = _featureService.GetAll();
             model.SelectedFeatures = house.Features;
+            model.Services = _servicexService.GetAll();
+            model.SelectedServices = house.Services;
             return View(model);
         }
 
@@ -96,7 +109,7 @@ namespace Web.Controllers
         // // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features)
+        public IActionResult Edit(int id, [Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (id != model.HouseId)
             {
@@ -110,6 +123,11 @@ namespace Web.Controllers
                 {
                     house.Features.Add(new HouseFeature() { HouseId = model.HouseId, FeatureId = featureId });
                 }
+                var houseServices = services.Select(id => new HouseService() { ServiceId = id });
+                foreach (var serviceId in services)
+                {
+                    house.Services.Add(new HouseService() { HouseId = model.HouseId, ServiceId = serviceId });
+                }
                 _houseService.Update(house, model.ImageUploaded);
                 _houseService.Save();
                 TempData["TransactionCompleted"] = "House edited Sucessfully";
@@ -118,6 +136,8 @@ namespace Web.Controllers
             model.Provinces = new SelectList(_provinceService.GetAll(), "ProvinceId", "Name", model.ProvinceId);
             model.Features = _featureService.GetAll();
             model.SelectedFeatures = features.Select(id => new HouseFeature() { FeatureId = id });
+            model.Services = _servicexService.GetAll();
+            model.SelectedServices = services.Select(id => new HouseService() { ServiceId = id });
             return View(model);
         }
     }

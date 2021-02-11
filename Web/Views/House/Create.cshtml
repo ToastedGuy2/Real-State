@@ -9,7 +9,7 @@
     <div class="col-md-4 mx-auto">
         <form asp-action="Create" enctype="multipart/form-data">
             <h1 class="mt-3"> <span class="text-success"><i class="fas fa-plus"></i></span> Add a <span class="primary-color"><i class="fas fa-home"></i></span> House</h1>
-            <div asp-validation-summary="All" class="text-danger"></div>
+            @* <div asp-validation-summary="All" class="text-danger"></div> *@
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label><span class="text-danger">*</span>
                 <input asp-for="Name" class="form-control" placeholder="House #8" />
@@ -55,9 +55,29 @@
                 <label class="form-label">Features (Optional)</label>
                     @foreach (var feature in @Model.Features){
                         <div class="form-check">
-                        <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features">
+                            @if(@Model.SelectedFeatures.Any(s => s.FeatureId == feature.FeatureId)){
+                                <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features" checked>
+                            } else{
+                                <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features">
+                            }
                         <label class="form-check-label" for="defaultCheck1">
                             @feature.Name
+                        </label>
+                        </div>
+                    }
+
+            </div>
+            <div id="services-list">
+                <label class="form-label">Services (Optional)</label>
+                    @foreach (var service in @Model.Services){
+                        <div class="form-check">
+                            @if(@Model.SelectedServices.Any(s => s.ServiceId == service.ServiceId)){
+                                <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services" checked>
+                            } else{
+                        <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services">
+                            }
+                        <label class="form-check-label" for="defaultCheck1">
+                            @service.Name
                         </label>
                         </div>
                     }

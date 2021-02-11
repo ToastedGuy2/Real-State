@@ -103,13 +103,12 @@ namespace Repositories.Context
             modelBuilder.Entity<HouseService>()
                 .HasOne(bS => bS.House)
                 .WithMany(b => b.Services)
-                .HasForeignKey(bS => bS.ServiceId).OnDelete(DeleteBehavior.NoAction); ;
+                .HasForeignKey(bS => bS.HouseId).OnDelete(DeleteBehavior.NoAction); ;
             ;
-
             modelBuilder.Entity<HouseService>()
                 .HasOne(bS => bS.Service)
                 .WithMany(s => s.Houses)
-                .HasForeignKey(bs => bs.HouseId).OnDelete(DeleteBehavior.NoAction); ;
+                .HasForeignKey(bs => bs.ServiceId).OnDelete(DeleteBehavior.NoAction); ;
             ;
 
             modelBuilder.Entity<House>().HasData(
@@ -411,6 +410,165 @@ namespace Repositories.Context
                     Name = "Puntarenas"
                 }
                 );
+            modelBuilder.Entity<Service>().HasData(
+                new Service()
+                {
+                    ServiceId = 1,
+                    Name = "Surveillance 24/7",
+                    Price = 30,
+                    Description = "lorem ipsum"
+                },
+                new Service()
+                {
+                    ServiceId = 2,
+                    Name = "Swimming Pool Maintenance",
+                    Price = 13,
+                    Description = "lorem ipsum"
+                },
+                new Service()
+                {
+                    ServiceId = 3,
+                    Name = "Garden..",
+                    Price = 25,
+                    Description = "lorem ipsum"
+                },
+                new Service()
+                {
+                    ServiceId = 4,
+                    Name = "House Insurance",
+                    Price = 30,
+                    Description = "lorem ipsum"
+                },
+                new Service()
+                {
+                    ServiceId = 5,
+                    Name = "Solar Panels",
+                    Price = 9,
+                    Description = "lorem ipsum"
+                }
+                );
+            modelBuilder.Entity<HouseService>().HasData(
+               new HouseService()
+               {
+                   HouseId = 1,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 2,
+                   ServiceId = 4,
+               },
+               new HouseService()
+               {
+                   HouseId = 3,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 3,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 3,
+                   ServiceId = 3
+               },
+               new HouseService()
+               {
+                   HouseId = 4,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 4,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 4,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 4,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 5,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 5,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 5,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 5,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 5,
+                   ServiceId = 5,
+               },
+               new HouseService()
+               {
+                   HouseId = 6,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 6,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 6,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 6,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 6,
+                   ServiceId = 5,
+               },
+               new HouseService()
+               {
+                   HouseId = 7,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 7,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 7,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 7,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 7,
+                   ServiceId = 5,
+               }
+            );
 
         }
     }
