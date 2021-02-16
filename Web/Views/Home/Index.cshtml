@@ -1,3 +1,58 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/index.css">
+}
+    <div class="container-fluid" id="hobbit-background-image">
+        <div class="row">
+            <div class="welcome">
+                <div class="discover">
+                    <form action="" class="discover-form">
+                        <h1 class="discover-title">Discover a place
+                            you'll love to live</h1>
+                        <div class="input-group">
+                            <select class="form-select form-select-lg" id="inputGroupSelect04"
+                                aria-label="Example select with button addon">
+                                <option selected>Choose...</option>
+                                <option value="1">San Jose</option>
+                                <option value="2">Alajuela</option>
+                                <option value="3">Heredia</option>
+                                <option value="4">Cartago</option>
+                                <option value="5">Limon</option>
+                                <option value="6">Puntarenas</option>
+                                <option value="7">Guanacaste</option>
+                            </select>
+                            <button class="btn btn-lg btn-danger" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row text-center">
+            <h1>See how <span class="brand-name">Rent<span class="ME-highlighted-text">ME</span></span> can help</h1>
+            <div class="col-4 p-3">
+                <span class="text-success"><i class="fas fa-home fa-5x"></i></span>
+                <h2>Rent a Home</h2>
+                <p>With 35+ filters and custom keyword search, Trulia can help you easily find a home or apartment for
+                    rent that you'll love.</p>
+            </div>
+            <div class="col-4 p-3">
+                <span class="text-warning"><i class="fas fa-coins fa-5x"></i></span>
+                <h2>It's cheap</h2>
+                <p>You dont have to sell a lung, in order to live comfortably!</p>
+            </div>
+            <div class="col-4 p-3">
+                <span class="text-danger"><i class="fas fa-life-ring fa-5x"></i></span>
+                <h2>Multiple Services</h2>
+                <p>Over 100+ Services to select when you want to rent a home, it will make your life easier!!!</p>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        
+    }

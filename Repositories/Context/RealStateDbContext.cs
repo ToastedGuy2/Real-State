@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,6 @@ namespace Repositories.Context
         public RealStateDbContext(DbContextOptions<RealStateDbContext> options) : base(options)
         {
         }
-
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<AppUserRole> AppUserRoles { get; set; }
-
 
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseFeature> HouseFeatures { get; set; }
@@ -30,6 +27,35 @@ namespace Repositories.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // Refactor Identity Table Names
+            modelBuilder.Entity<AppUser>(entity =>
+            {
+                entity.ToTable(name: "User");
+            });
+            modelBuilder.Entity<IdentityRole>(entity =>
+            {
+                entity.ToTable(name: "Role");
+            });
+            modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.ToTable("UserRoles");
+            });
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity =>
+            {
+                entity.ToTable("UserClaims");
+            });
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.ToTable("UserLogins");
+            });
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity =>
+            {
+                entity.ToTable("RoleClaims");
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.ToTable("UserTokens");
+            });
             // Many to Many Relationships
 
 
@@ -40,14 +66,6 @@ namespace Repositories.Context
                 HasMany(u => u.Bills).
                 WithOne(b => b.Customer).
                 HasForeignKey(b => b.CustomerId).OnDelete(DeleteBehavior.NoAction); ;
-
-            // User to AppUserRole
-            modelBuilder
-            .Entity<AppUserRole>()
-            .HasMany(uR => uR.Users)
-            .WithOne(u => u.Role)
-            .HasForeignKey(u => u.AppUserRoleId)
-            .OnDelete(DeleteBehavior.NoAction);
 
             // House
 

@@ -1,6 +1,8 @@
 using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -28,17 +30,41 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+                    .AddRazorRuntimeCompilation();
 
             services.AddDbContextPool<RealStateDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Standard")));
 
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<RealStateDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>()
+                    .AddEntityFrameworkStores<RealStateDbContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
+
             services.Configure<IdentityOptions>(options =>
             {
+
                 //add this option to identity configuration
                 options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
             });
+
+            // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            // .AddCookie(options =>
+            // {
+            //     options.Events.OnRedirectToAccessDenied = context =>
+            //     {
+            //         context.Response.StatusCode = 403;
+            //         return Task.CompletedTask;
+            //     };
+            // });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IHouseRepository, HouseRepository>();
@@ -75,15 +101,15 @@ namespace Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    // pattern: "{controller=Item}/{action=List}/{id?}");
-                    // pattern: "{controller=House}/{action=Edit}/{id=1}");
-                    pattern: "{controller=House}/{action=Edit}/{id=1}");
+                    // pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

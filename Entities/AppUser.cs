@@ -9,11 +9,8 @@ namespace Entities
     public class AppUser : IdentityUser
     {
         [Required]
-        public string Name { get; set; }
-        [Required]
-        public int AppUserRoleId { get; set; }
-        [ForeignKey("AppUserRoleId")]
-        public AppUserRole Role { get; set; }
+        public string FullName { get; set; }
+
         public ICollection<Bill> Bills { get; set; } = new List<Bill>();
     }
 }
