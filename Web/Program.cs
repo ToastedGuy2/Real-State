@@ -1,5 +1,9 @@
 using System;
+using System.Threading.Tasks;
+using Entities;
+using IdentityProject.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,23 +14,28 @@ namespace Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
+                var services = scope.ServiceProvider;
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 try
                 {
                     var context = scope.ServiceProvider.GetService<RealStateDbContext>();
-                    // for demo purposes, delete the database & migrate on startup so 
-                    // we can start with a clean slate
                     context.Database.EnsureDeleted();
                     context.Database.Migrate();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await ContextSeed.SeedRolesAsync(roleManager);
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    await ContextSeed.SeedUsersAsync(userManager);
+
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                    var logger = loggerFactory.CreateLogger<Program>();
                     logger.LogError(ex, "An error occurred while migrating the database.");
                 }
             }

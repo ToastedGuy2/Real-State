@@ -10,9 +10,11 @@ using Repositories.Context;
 using Services;
 using Services.Generic;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class ServiceController : Controller
     {
         private readonly IGenericService<Service> _serviceService;

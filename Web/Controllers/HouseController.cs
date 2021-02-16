@@ -1,3 +1,5 @@
+using System.Reflection.Emit;
+using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,11 @@ using Services.Generic;
 using Web.ViewModels.House;
 using AutoMapper;
 using Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class HouseController : Controller
     {
         private readonly IHouseService _houseService;
