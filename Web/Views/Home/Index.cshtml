@@ -5,9 +5,10 @@
 @section CSS{
     <link rel="stylesheet" href="~/css/index.css">
 }
+    <div id="viewport"></div>
     <div class="container-fluid" id="hobbit-background-image">
-        <div class="row">
-            <div class="welcome">
+        <div class="row h-100 ">
+            <div class=" h-100 welcome d-flex align-items-center justify-content-center">
                 <div class="discover">
                     <form action="" class="discover-form">
                         <h1 class="discover-title">Discover a place
@@ -32,27 +33,79 @@
         </div>
     </div>
     <div class="container mt-5">
-        <div class="row text-center">
-            <h1>See how <span class="brand-name">Rent<span class="ME-highlighted-text">ME</span></span> can help</h1>
-            <div class="col-4 p-3">
+        <div class="row text-center justify-content-center">
+            <h1 class="secondary-color">See how <span class="ME-highlighted-text">RentME</span> can help</h1>
+            <div class="col-lg-4 col-sm-6 p-3">
                 <span class="text-success"><i class="fas fa-home fa-5x"></i></span>
-                <h2>Rent a Home</h2>
+                <h2 class="secondary-color">Rent a Home</h2>
                 <p>With 35+ filters and custom keyword search, Trulia can help you easily find a home or apartment for
                     rent that you'll love.</p>
             </div>
-            <div class="col-4 p-3">
+            <div class="col-lg-4 col-sm-6 p-3">
                 <span class="text-warning"><i class="fas fa-coins fa-5x"></i></span>
-                <h2>It's cheap</h2>
+                <h2 class="secondary-color">It's cheap</h2>
                 <p>You dont have to sell a lung, in order to live comfortably!</p>
             </div>
-            <div class="col-4 p-3">
+            <div class="col-lg-4 col-sm-6 p-3">
                 <span class="text-danger"><i class="fas fa-life-ring fa-5x"></i></span>
-                <h2>Multiple Services</h2>
+                <h2 class="secondary-color">Multiple Services</h2>
                 <p>Over 100+ Services to select when you want to rent a home, it will make your life easier!!!</p>
             </div>
         </div>
+         <!-- START THE FEATURETTES -->
+
+
+    <h1 class="text-center secondary-color">Look at our customer testimonies</h1>
+    <div class="border border-2 rent-me-border-primary-color"></div>
+    <div class="row py-5">
+      <div class="col-md-7 d-flex align-items-center">
+        <div class="testimony text-center">
+            <h2 class="featurette-heading">What is Lorem Ipsum? </h2>
+            <p class="lead">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+            <h5 class="text-muted fst-italic">Bill Gates - Microsoft CEO</h5>
+        </div>
+      </div>
+      <div class="col-md-5">
+          <img src="~/images/Testimonies/Bill Gates.jpg" alt="" srcset="" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="border border-2 rent-me-border-primary-color"></div>
+
+    <div class="row py-5">
+      <div class="col-md-7 d-flex align-items-center">
+        <div class="testimony text-center">
+            <h2 class="featurette-heading">Where does it come from? </h2>
+            <p class="lead">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."</p>
+                  <h5 class="text-muted fst-italic">Tim Cook - Apple CEO</h5>
+        </div>
+</div>
+      <div class="col-md-5 order-md-1">
+          <img src="~/images/Testimonies/Tim Cook.jpeg" alt="" srcset="" class="img-fluid">
+      </div>
+    </div>
+
+    <div class="border border-2 rent-me-border-primary-color"></div>
+
+    <div class="row py-5">
+      <div class="col-md-7 d-flex align-items-center">
+        <div class="testimony text-center">
+            <h2 class="featurette-heading">What is Lorem Ipsum? </h2>
+            <p class="lead">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                  <h5 class="text-muted fst-italic">Jeff Bez - Amazon CEO</h5>
+        </div>
+</div>
+      <div class="col-md-5">
+          <img src="~/images/Testimonies/Jeff Bez.png" alt="" srcset="" class="img-fluid">
+      </div>
+    </div>
+
+
+
+  </div>
+
     </div>
 
     @section Scripts{
-        
+        <script src="~/js/index.js"></script>
     }

@@ -39,7 +39,7 @@
 }
 
 #filter-list {
-    border-right: 2px solid gray;
+    border-right: 2px solid #961047;
     height: 800px;
 }
 
@@ -49,4 +49,23 @@
 
 .card-lists-onscreen {
     display: flex;
+}
+
+.see-details-btn {
+    border-color: #14445c;
+    color: #14445c;
+    margin: 0px 0.5rem;
+}
+
+.see-details-btn:hover,
+.see-details-btn:active {
+    background-color: #14445c;
+    color: #fcf4ec;
+    border-color: #14445c;
+}
+
+.see-details-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(20 68 92 / 50%);
+    background-color: #14445c;
+    color: #fcf4ec
 }

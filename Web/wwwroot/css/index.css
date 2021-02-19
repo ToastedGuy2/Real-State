@@ -1,4 +1,13 @@
 /* Index */
+#viewport {
+    height: 100vh;
+    width: 0vw;
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+    background: transparent;
+}
+
 .current {
     color: #961047;
 }
@@ -6,13 +15,12 @@
 /* Main */
 /* END */
 #hobbit-background-image {
-    height: 700px;
+    position: relative;
     width: 100%;
     background-image: url("../images/index-background-image.jpeg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    /* border-radius: 15px; */
     text-align: center;
 }
 
@@ -21,6 +29,15 @@
 }
 
 .discover-title {
-    margin: 300px 0px 10px 0px;
+    font-size: 3rem;
     color: #fff;
+    font-weight: 700;
+}
+
+.rent-me-border-primary-color {
+    border-color: #961047 !important;
+}
+
+.form-select:focus {
+    box-shadow: none;
 }
