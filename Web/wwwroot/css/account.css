@@ -1,0 +1,21 @@
+#sign-up-here {
+    color: #961047;
+}
+
+#sign-up-here:hover,
+#sign-up-here:focus {
+    color: #14445c;
+}
+
+#account-form {
+    max-width: 500px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #14445c;
+}

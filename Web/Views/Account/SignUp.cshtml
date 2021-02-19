@@ -1,35 +1,40 @@
 @model SignUpViewModel
 @{
     ViewBag.Title = "Sign Up";
-    @* Layout = "_LayoutForForms"; *@
+    Layout = "_FormsLayout";
 }
-<form class="p-5 shadow rounded mx-auto" asp-controller="Account" asp-action="SignUp" method="post">
-    <h1 class="text-center">Sign Up</h1>
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control" placeholder="Lore ipsum">
-        <span class="text-danger" asp-validation-for="FullName"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" placeholder="example@example.com" />
-        <span class="text-danger" asp-validation-for="Email"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" placeholder="**********" />
-        <span class="text-danger" asp-validation-for="Password">
-        </span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" class="form-control" placeholder="**********" />
-        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign Up</button>
-    <a asp-action="Login" class="btn btn-danger">Cancel</a>
-</form>
+@section CSS{
+    <link rel="stylesheet" href="~/css/account.css">
+}
+
+        <form id="account-form" class="bg-light mx-auto shadow mt-lg-5 mt-sm-3 p-4 border border-2 rounded-3" asp-controller="Account" asp-action="SignUp" method="post">
+    <h1 class="text-center"><a asp-controller="Home" asp-action="Index" class="primary-color">RentME</a></h1>
+    <h2 class="text-center secondary-color"><i class="fas fa-user-circle"></i> Sign Up</h2>            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-2">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" placeholder="Lore ipsum">
+                <span class="text-danger" asp-validation-for="FullName"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="example@example.com" />
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" placeholder="**********" />
+                <span class="text-danger" asp-validation-for="Password">
+                </span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="**********" />
+                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <button id="type="submit" class="btn btn-primary w-100 my-2">Sign Up</button>
+            <a asp-action="Login" class="btn btn-danger w-100">Cancel</a>
+        </form>
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
 }
+

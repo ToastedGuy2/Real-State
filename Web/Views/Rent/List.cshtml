@@ -5,59 +5,58 @@
 @section CSS{
     <link rel="stylesheet" href="~/css/rentList.css">
 }
-<div class="row">
-    <div class="col-lg-2 col-md-4">
-        <div id="filter-list">
-            <div id="feature-list">
-                <h3>Features</h3>
-                @foreach (var feature in @Model.Features)
-                {
-                    <div class="feature-item">
-                        <input type="checkbox" class="form-check-input ms-4 me-1" value="@feature.FeatureId" name="feature">
-                            @feature.Name
-                    </div>
-                }
-            </div>
-            <div id="province-list mt-3">
-                <h3>Provinces</h3>
-                @foreach (var province in @Model.Provinces)
-                {
-                    <div class="province-item">
-                        <input type="checkbox" class="form-check-input ms-4 me-1" value="@province.ProvinceId" name="selectedProvinces">
-                            @province.Name
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-10 col-md-8">
-        <div class="container-fluid">
-            <div class="row" id="houseCards">
-                    @foreach (var house in @Model.Houses)
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <div id="filter-list">
+                <div id="feature-list">
+                    <h3>Features</h3>
+                    @foreach (var feature in @Model.Features)
                     {
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
-                                <div class="card">
-                                    <img src="~/images/Houses/@house.ImageName" class="card-img-top">
-                                    <div class="card-body">
-                                        <h3 class="card-title mb-2">₡@house.Price.ToString("N0")/month</h3>
-                                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-bed"></i> @house.Bedrooms Bedroom --- <i class="fas fa-toilet-paper"></i>
-                                            @house.Bathrooms Bathroom
-                                        </h6>
-                                        <p class="card-text"> @house.Name - @house.Province.Name </p>
-                                        <p class="card-text">  </p>
-                                        <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-outline-primary btn-sm w-100"><i
-                                                class="fas fa-eye"></i> See more
-                                            details</a>
-                                    </div>
-                                </div>
+                        <div class="feature-item">
+                            <input type="checkbox" class="form-check-input ms-4 me-1" value="@feature.FeatureId" name="feature">
+                                @feature.Name
                         </div>
                     }
+                </div>
+                <div id="province-list" class="mt-3">
+                    <h3>Provinces</h3>
+                    @foreach (var province in @Model.Provinces)
+                    {
+                        <div class="province-item">
+                            <input type="checkbox" class="form-check-input ms-4 me-1" value="@province.ProvinceId" name="selectedProvinces">
+                                @province.Name
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <div class="container-fluid">
+                <div class="row" id="houseCards">
+                        @foreach (var house in @Model.Houses)
+                        {
+                            <div class="col-lg-3 col-md-6 col-sm-6 mb-3">
+                                    <div class="card">
+                                        <img src="~/images/Houses/@house.ImageName" class="card-img-top">
+                                        <div class="card-body">
+                                            <h3 class="card-title mb-2">₡@house.Price.ToString("N0")/month</h3>
+                                            <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-bed"></i> @house.Bedrooms Bedroom --- <i class="fas fa-toilet-paper"></i>
+                                                @house.Bathrooms Bathroom
+                                            </h6>
+                                            <p class="card-text"> @house.Name - @house.Province.Name </p>
+                                            <p class="card-text">  </p>
+                                            <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-outline-primary btn-sm w-100 see-details-btn"><i
+                                                    class="fas fa-eye"></i> See more
+                                                details</a>
+                                        </div>
+                                    </div>
+                            </div>
+                        }
+                </div>
             </div>
         </div>
     </div>
-
-
-
 </div>
 
 @section scripts{

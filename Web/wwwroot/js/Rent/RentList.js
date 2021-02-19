@@ -43,7 +43,7 @@ features.forEach(feature => {
                                         </h6>
                                         <p class="card-text"> ${house.name} - ${house.province.name} </p>
                                         <p class="card-text">  </p>
-                                        <a href="${house.rentMeUrl}" class="btn btn-outline-primary btn-sm w-100"><i
+                                        <a href="${house.rentMeUrl}" class="btn btn-outline-primary btn-sm w-100 see-details-btn"><i
                                                 class="fas fa-eye"></i> See more
                                             details</a>
                                     </div>

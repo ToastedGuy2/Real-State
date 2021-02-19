@@ -40,8 +40,8 @@ namespace Web.Controllers
         }
         public async Task<IActionResult> House(int id)
         {
-            await Task.Yield();
-            return View();
+            var house = _houseService.GetById(id);
+            return View(house);
         }
 
     }
