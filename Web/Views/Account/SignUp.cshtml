@@ -9,7 +9,18 @@
 
         <form id="account-form" class="bg-light mx-auto shadow mt-lg-5 mt-sm-3 p-4 border border-2 rounded-3" asp-controller="Account" asp-action="SignUp" method="post">
     <h1 class="text-center"><a asp-controller="Home" asp-action="Index" class="primary-color">RentME</a></h1>
-    <h2 class="text-center secondary-color"><i class="fas fa-user-circle"></i> Sign Up</h2>            <div asp-validation-summary="All" class="text-danger"></div>
+    <h2 class="text-center secondary-color"><i class="fas fa-user-circle"></i> Sign Up</h2>            
+            @if(@TempData["IdentityErrors"]!=null){
+                var errorList = (string[]) @TempData["IdentityErrors"];
+                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                    @foreach (var error in errorList)
+                    {
+                        @error
+                        <br>
+                    }
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                }
             <div class="mb-2">
                 <label asp-for="FullName" class="form-label"></label>
                 <input asp-for="FullName" class="form-control" placeholder="Lore ipsum">

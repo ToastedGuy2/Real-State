@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Generic;
@@ -12,6 +13,7 @@ using Web.ViewModels.Rent;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Customer,Admin,SuperAdmin")]
     public class RentController : Controller
     {
         private readonly IHouseService _houseService;

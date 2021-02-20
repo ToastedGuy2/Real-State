@@ -60,6 +60,8 @@ namespace Web
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Home/Index";
             });
             // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             // .AddCookie(options =>
@@ -114,7 +116,7 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     // pattern: "{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=House}/{action=List}/{id?}");
                 endpoints.MapControllers();
             });
         }
