@@ -55,7 +55,8 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Email and/or password invalid");
+                    TempData["ShowLoginErrors"] = "Email and/or password invalid";
                 }
 
             }
@@ -75,7 +76,7 @@ namespace Web.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FullName = model.FullName, EmailConfirmed = true, PhoneNumberConfirmed = true };
+                var user = new AppUser { UserName = Guid.NewGuid().ToString(), Email = model.Email, FullName = model.FullName, EmailConfirmed = true, PhoneNumberConfirmed = true };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -87,10 +88,13 @@ namespace Web.Controllers
                 }
                 else
                 {
+                    var errorList = new List<string>();
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
+                        errorList.Add(error.Description);
                     }
+                    TempData["IdentityErrors"] = errorList.ToArray();
                 }
             }
 

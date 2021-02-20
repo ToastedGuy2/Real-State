@@ -1,4 +1,7 @@
 /* Global */
+html {
+    position: relative;
+}
 
 body {
     font-family: 'Source Sans Pro', sans-serif !important;
@@ -27,16 +30,6 @@ span.navbar-brand-name {
     color: #961047;
 }
 
-/* a.nav-link {
-    color: #961047 !important;
-    font-weight: 900;
-}
-
-.nav-link:hover,
-.nav-link:active {
-    color: #14445c !important;
-} */
-
 a.nav-link {
     color: #14445c !important;
     font-weight: 900;
@@ -51,7 +44,7 @@ a.nav-link {
     background-color: #961047;
     border-color: #961047;
     color: #fcf4ec;
-    margin: 0px 0.5rem;
+    /* margin: 0px 0.5rem; */
 }
 
 #sign-up-button:hover,
@@ -67,7 +60,7 @@ a.nav-link {
 #sign-in-button {
     border-color: #14445c;
     color: #14445c;
-    margin: 0px 0.5rem;
+    /* margin: 0px 0.5rem; */
 }
 
 #sign-in-button:hover,
@@ -86,28 +79,6 @@ a.nav-link {
     color: #961047;
 }
 
-/* Main */
-/* END */
-/* .discover {
-    height: 700px;
-    width: 100%;
-    background-image: url("Houses.jpeg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.discover-form {
-    display: inline-block;
-}
-
-.discover-title {
-    margin: 300px 0px 10px 0px;
-    color: #fff;
-} */
-
 .primary-color {
     color: #961047;
     font-weight: 700;
@@ -122,10 +93,24 @@ a.nav-link {
     color: #961047;
     font-weight: 700;
     border-top: 3px solid #961047;
-    /* position: absolute;
+    position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%; */
+    width: 100%;
+
+}
+
+#viewport {
+    height: 100vh;
+    width: 0vw;
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+    background: transparent;
+}
+
+.current {
+    color: #961047;
 }
 
 .secondary-color {

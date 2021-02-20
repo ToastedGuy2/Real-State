@@ -1,16 +1,5 @@
 /* Index */
-#viewport {
-    height: 100vh;
-    width: 0vw;
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
-    background: transparent;
-}
 
-.current {
-    color: #961047;
-}
 
 /* Main */
 /* END */
