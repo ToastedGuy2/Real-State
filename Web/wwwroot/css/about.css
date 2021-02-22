@@ -10,13 +10,12 @@ body {
 }
 
 .developer-photo {
-    height: 400px;
-    width: 100%;
-    border: 5px solid #91171f;
+    max-height: 500px;
+    max-width: 400px;
 }
 
 .developer-description {
-    line-height: 5;
+    line-height: 1.5;
 }
 
 footer {
