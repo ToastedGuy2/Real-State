@@ -433,35 +433,35 @@ namespace Repositories.Context
                 {
                     ServiceId = 1,
                     Name = "Surveillance 24/7",
-                    Price = 30,
+                    Price = 30000,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 2,
                     Name = "Swimming Pool Maintenance",
-                    Price = 13,
+                    Price = 13000,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 3,
                     Name = "Garden..",
-                    Price = 25,
+                    Price = 25000,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 4,
                     Name = "House Insurance",
-                    Price = 30,
+                    Price = 30000,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 5,
                     Name = "Solar Panels",
-                    Price = 9,
+                    Price = 9000,
                     Description = "lorem ipsum"
                 }
                 );
