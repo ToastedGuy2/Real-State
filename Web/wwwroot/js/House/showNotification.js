@@ -5,3 +5,5 @@ const notyf = new Notyf({
     }
 });
 notyf.success("Transaction Complete");
+
+document.getElementById('rent-link').classList.add('current');

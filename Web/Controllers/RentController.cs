@@ -13,7 +13,7 @@ using Web.ViewModels.Rent;
 
 namespace Web.Controllers
 {
-    [Authorize(Roles = "Customer,Admin,SuperAdmin")]
+    [Authorize(Roles = "Customer,SuperAdmin")]
     public class RentController : Controller
     {
         private readonly IHouseService _houseService;

@@ -38,9 +38,8 @@
     }
 }
 
-#filter-list {
-    border-right: 2px solid #961047;
-    height: 800px;
+#rent-houses-container {
+    border-color: #961047 !important;
 }
 
 .card-lists-hidden {

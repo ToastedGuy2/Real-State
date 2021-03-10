@@ -2,9 +2,19 @@
 
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
-
 @if (SignInManager.IsSignedIn(User))
 {
+    var loggedUser = await UserManager.GetUserAsync(User);
+    var roles = await UserManager.GetRolesAsync(loggedUser);
+    if (roles.Any(r => r != "Customer"))
+    {
+        <li class="nav-item">
+    <a class="nav-link" asp-controller="House" asp-action="List" id="house-link">Houses</a>
+</li>
+        <li class="nav-item">
+    <a class="nav-link" asp-controller="Service" asp-action="List" id="service-link">Services</a>
+</li>
+    }
     <li class="nav-item">
     <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Hello
         @User.Identity.Name!</a>

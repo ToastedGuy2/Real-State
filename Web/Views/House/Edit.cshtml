@@ -12,6 +12,7 @@
     <h1 class="text-center"><a asp-controller="Home" asp-action="Index" class="primary-color">RentME</a></h1>
     <h2 class="text-center secondary-color"><i class="far fa-edit"></i> Edit House</h2>                        
             <input type="hidden" asp-for="HouseId">
+            <input type="hidden" asp-for="ImageName">
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label><span class="text-danger">*</span>
                 <input asp-for="Name" class="form-control" placeholder="House #8" />
@@ -44,7 +45,7 @@
                 <select asp-for="ProvinceId" class="form-select" asp-items="@Model.Provinces"></select>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageUploaded" class="form-label"></label><span class="text-danger">*</span>
+                <label asp-for="ImageUploaded" class="form-label"></label>
                 <input asp-for="ImageUploaded" class="form-control" type="file" accept=".png,.jpg,.jpeg">
                 <span class="text-danger" asp-validation-for="ImageUploaded" id="InputTagSpan"></span>
             </div>

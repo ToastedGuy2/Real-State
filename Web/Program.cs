@@ -25,7 +25,6 @@ namespace Web
                 try
                 {
                     var context = scope.ServiceProvider.GetService<RealStateDbContext>();
-                    context.Database.EnsureDeleted();
                     context.Database.Migrate();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await ContextSeed.SeedRolesAsync(roleManager);

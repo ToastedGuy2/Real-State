@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Details";
+}
+@model DetailsHouseViewModel
+<div class="container my-md-3">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="~/images/Houses/@Model.House.ImageName" class="img-fluid">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="text-center">@Model.House.Name</h1>
+
+            <p class="fw-bold"><span class="primary-color">Price:</span> ₡@Model.House.Price.ToString("N0")/month
+            </p>
+            <p class="">@Model.House.Description</p>
+            <ul>
+                <li>
+                    <p><span class="fw-bold">Location: </span>@Model.House.Province.Name </p>
+                </li>
+                <li>
+                    <p><span class="fw-bold">Size:</span> @Model.House.Size m2</p>
+                </li>
+                <li>
+                    <p><span class="fw-bold">Bedrooms: </span>@Model.House.Bedrooms</p>
+                </li>
+                <li>
+                    <p><span class="fw-bold">Bathrooms:</span> @Model.House.Bathrooms</p>
+                </li>
+            </ul>
+            <div id="features" class="text-end mt-5">
+                <span class="text-muted">Features: </span>
+                @{
+                    var bgColorList = new List<string>() {
+                "bg-primary","bg-success","bg-danger","bg-warning","bg-info","bg-secondary","bg-dark" };
+                    for (int i = 0; i < Model.FeaturesToDisplay.Count; i++)
+                    {
+                        var classes = $"badge rounded-pill {bgColorList[i]}";
+                        <span class="@classes">@Model.FeaturesToDisplay.ToArray()[i].Name </span>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

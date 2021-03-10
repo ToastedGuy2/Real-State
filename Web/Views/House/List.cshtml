@@ -40,6 +40,8 @@
                             @Html.DisplayFor(modelItem => house.Province.Name)
                         </td>
                         <td>
+                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@house.HouseId"><i class="far fa-eye"></i>
+                                Details</a>
                             <a class="btn btn-warning" asp-action="Edit" asp-route-id="@house.HouseId"><i class="far fa-edit"></i>
                                 Edit</a>
                         </td>
@@ -51,29 +53,10 @@
 </div>
 @section Scripts{
     <script src="~/lib/notyf/notyf.min.js"></script>
+    <script src="~/js/house_list.js"></script>
+
             @if(TempData["TransactionCompleted"]!=null){
                 <script src="~/js/House/showNotification.js"></script>
                 }
 
     }
-
-
-                    @* <script>
-                        const notyf = new Notyf({
-                    position: {
-                        x: 'right',
-                        y: 'top',
-                    }
-                });
-                notyf.success("Hello");
-            </script>
-            @if(TempData["TransactionCompleted"]!=null){
-            <script>
-                        const notyf = new Notyf({
-                    position: {
-                        x: 'right',
-                        y: 'top',
-                    }
-                });
-                notyf.success(@((string) TempData["TransactionCompleted"]));
-            </script> *@

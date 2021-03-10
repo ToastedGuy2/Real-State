@@ -24,7 +24,7 @@ namespace Services
             {
                 throw new ArgumentNullException(nameof(file));
             }
-            var uploadDirectory = "images/Items";
+            var uploadDirectory = "images/Houses";
             var uploadPath = Path.Combine(_env.WebRootPath, uploadDirectory);
 
             if (!Directory.Exists(uploadPath))

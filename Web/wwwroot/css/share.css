@@ -1,7 +1,7 @@
 /* Global */
-html {
+/* html {
     position: relative;
-}
+} */
 
 body {
     font-family: 'Source Sans Pro', sans-serif !important;
@@ -75,13 +75,13 @@ a.nav-link {
     color: #fcf4ec
 }
 
-.current {
-    color: #961047;
+a.current {
+    color: #961047 !important;
 }
 
 .primary-color {
-    color: #961047;
-    font-weight: 700;
+    color: #961047 !important;
+    font-weight: 700 !important;
 }
 
 .body {
@@ -93,10 +93,10 @@ a.nav-link {
     color: #961047;
     font-weight: 700;
     border-top: 3px solid #961047;
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100%; */
 
 }
 

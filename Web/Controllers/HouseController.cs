@@ -113,7 +113,7 @@ namespace Web.Controllers
         // // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
+        public IActionResult Edit(int id, [Bind("HouseId,ImageName,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (id != model.HouseId)
             {
@@ -142,6 +142,26 @@ namespace Web.Controllers
             model.SelectedFeatures = features.Select(id => new HouseFeature() { FeatureId = id });
             model.Services = _servicexService.GetAll();
             model.SelectedServices = services.Select(id => new HouseService() { ServiceId = id });
+            return View(model);
+        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var house = _houseService.GetById(id.Value);
+            if (house == null)
+            {
+                return NotFound();
+            }
+            var houseFeatures = _featureService.GetAll().Where(f => house.Features.Any(hf => hf.FeatureId == f.FeatureId));
+            var model = new DetailsHouseViewModel
+            {
+                House = house,
+                FeaturesToDisplay = houseFeatures.ToList()
+            };
             return View(model);
         }
     }

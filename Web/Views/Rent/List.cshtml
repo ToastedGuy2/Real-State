@@ -5,16 +5,17 @@
 @section CSS{
     <link rel="stylesheet" href="~/css/rentList.css">
 }
-<div class="container-fluid mt-3">
+<div class="container-fluid my-3">
     <div class="row">
-        <div class="col-lg-2 col-md-4 col-sm-5">
+        @* <div class="col-lg-2 col-md-2 col-sm-5 d-none-sm"> *@
+        <div class="col-lg-2 col-md-2 col-sm-5 d-none-sm">
             <div id="filter-list">
                 <div id="feature-list">
                     <h3>Features</h3>
                     @foreach (var feature in @Model.Features)
                     {
                         <div class="feature-item">
-                            <input type="checkbox" class="form-check-input ms-4 me-1" value="@feature.FeatureId" name="feature">
+                            <input type="checkbox" class="form-check-input" value="@feature.FeatureId" name="feature">
                                 @feature.Name
                         </div>
                     }
@@ -24,19 +25,19 @@
                     @foreach (var province in @Model.Provinces)
                     {
                         <div class="province-item">
-                            <input type="checkbox" class="form-check-input ms-4 me-1" value="@province.ProvinceId" name="selectedProvinces">
+                            <input type="checkbox" class="form-check-input me-2" value="@province.ProvinceId" name="selectedProvinces">
                                 @province.Name
                         </div>
                     }
                 </div>
             </div>
         </div>
-        <div class="col-lg-10 col-md-8">
+        <div class="col-lg-10 col-md-10 col-sm-7 border-start border-3" id="rent-houses-container">
             <div class="container-fluid">
                 <div class="row" id="houseCards">
                         @foreach (var house in @Model.Houses)
                         {
-                            <div class="col-lg-4 col-md-6 col-sm-7 mb-3">
+                            <div class="col-lg-4 col-md-6 mb-3">
                                     <div class="card">
                                         <img src="~/images/Houses/@house.ImageName" class="card-img-top">
                                         <div class="card-body">
