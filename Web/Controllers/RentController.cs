@@ -19,12 +19,14 @@ namespace Web.Controllers
         private readonly IHouseService _houseService;
         private readonly IGenericService<Province> _provinceService;
         private readonly IGenericService<Feature> _featureService;
+        private readonly IGenericService<Service> _serviceService;
         private readonly IMapper _autoMapper;
-        public RentController(IHouseService houseService, IGenericService<Province> provinceService, IGenericService<Feature> featureService, IMapper autoMapper)
+        public RentController(IHouseService houseService, IGenericService<Province> provinceService, IGenericService<Feature> featureService, IGenericService<Service> serviceService, IMapper autoMapper)
         {
             this._houseService = houseService;
             this._provinceService = provinceService;
             this._featureService = featureService;
+            this._serviceService = serviceService;
             _autoMapper = autoMapper;
         }
 
@@ -40,10 +42,25 @@ namespace Web.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> House(int id)
+        public async Task<IActionResult> House(int? id)
         {
-            var house = _houseService.GetById(id);
-            return View(house);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var house = _houseService.GetById(id.Value);
+            if (house == null)
+            {
+                return NotFound();
+            }
+            var houseServices = _serviceService.GetAll().Where(s => house.Services.Any(hs => hs.ServiceId == s.ServiceId)); 
+            var model = new RentHouseViewModel
+            {
+                House = house,
+                ServicesToDisplay = houseServices.ToList()
+            };
+            return View(model);
         }
 
     }

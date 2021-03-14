@@ -446,7 +446,7 @@ namespace Repositories.Context
                 new Service()
                 {
                     ServiceId = 3,
-                    Name = "Garden..",
+                    Name = "Garden",
                     Price = 25000,
                     Description = "lorem ipsum"
                 },

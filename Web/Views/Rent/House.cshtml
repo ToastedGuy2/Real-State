@@ -1,90 +1,163 @@
+@using System.Globalization
 @{
     ViewData["Title"] = "House";
+    var today = DateTime.Now.ToString("yyyy/MM/dd");
+    var next10days = DateTime.Now.AddDays(10).ToString("yyyy/MM/dd");
 }
-@model House
+@section CSS{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_red.css">
+    @* <link rel="stylesheet" href="style.css"> *@
+}
+
+@model RentHouseViewModel
 <div class="container-fluid my-3">
     <div class="row">
         <div class="col-lg-5 ">
-            <img src="~/images/Houses/@Model.ImageName" class="img-fluid">
+            <img src="~/images/Houses/@Model.House.ImageName" class="img-fluid">
         </div>
         <div class="col-lg-4 mx-md-5 ">
-            <h1 class="text-center">@Model.Name</h1>
+            <h1 class="text-center">@Model.House.Name</h1>
             <p><span class="fw-bold text-muted">Price:</span><span
-                    class="badge bg-primary">₡@Model.Price.ToString("N0")/month</span>
+                    class="badge bg-primary">@Model.House.Price.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))/month</span>
             </p>
-            <p class="">@Model.Description</p>
+            <p class="">@Model.House.Description</p>
             <ul>
                 <li>
-                    <p><span class="fw-bold">Location: </span>@Model.Province.Name </p>
+                    <p><span class="fw-bold">Location: </span>@Model.House.Province.Name </p>
                 </li>
                 <li>
-                    <p><span class="fw-bold">Size:</span> @Model.Size m2</p>
+                    <p><span class="fw-bold">Size:</span> @Model.House.Size m2</p>
                 </li>
                 <li>
-                    <p><span class="fw-bold">Bedrooms: </span>@Model.Bedrooms</p>
+                    <p><span class="fw-bold">Bedrooms: </span>@Model.House.Bedrooms</p>
                 </li>
                 <li>
-                    <p><span class="fw-bold">Bathrooms:</span> @Model.Bathrooms</p>
+                    <p><span class="fw-bold">Bathrooms:</span> @Model.House.Bathrooms</p>
                 </li>
             </ul>
         </div>
         <div class="col-lg-2 border rounded border-2 py-3">
             <form action="post">
-                <h5 class="text-center fw-bold">How long will you stay here?</h5>
+                <input type="hidden" asp-for="House.Price">
+                <h5 class="text-center fw-bold">Rent Details</h5>
+                    <div class="mb-3">
+                    <label asp-for="From" class="form-label"></label><span class="text-danger">*</span>
+                    <input asp-for="From" class="form-control">
+                    @* <small class="text-muted">mm/dd/yyyy</small> *@
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+                
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Months</label>
-                    <input type="number" name="months" id="months" class="form-control" min="1" placeholder="1" value="1">
+                    <label asp-for="Months" class="form-label"></label><span class="text-danger">*</span>
+                    <input asp-for="Months" class="form-control" min="1" placeholder="1">
+                    <span asp-validation-for="Months" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <div class="col-auto">
-                        <label for="from" class="form-label">From</label>
-                        <input type="text" name="from" id="from" class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="col-auto">
-                        <label for="to" class="form-label">To</label>
-                        <input type="text" name="to" id="to" class="form-control" disabled>
-                    </div>
+                        <label asp-for="To" class="form-label"></label>
+                        <input asp-for="To" class="form-control" disabled>
                 </div>
                 <div class="border border-bottom my-3"></div>
                 <h5 class="text-center fw-bold">Services</h5>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Surveillance 24/7 <span class="badge rounded-pill bg-warning text-dark">₡ 125,210</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Swimming Pool Maintenance <span class="badge rounded-pill bg-warning text-dark">₡ 125,210</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Oshino Meme <span class="badge rounded-pill bg-warning text-dark">₡ 125,210</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Araragi Koyomi <span class="badge rounded-pill bg-warning text-dark">₡ 125,210</span>
-                    </label>
-                </div>
+                @foreach (var service in Model.ServicesToDisplay)
+                {
+                    <div class="form-check">
+                        <input type="checkbox" name="service" value="@service.Price" class="form-check-input" >
+                        <label class="form-check-label" > 
+                            @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span>
+                        </label>
+                    </div>
+                }
+
                 <div class="border border-bottom my-3"></div>
                 <h5 class="text-center fw-bold">Costs</h5>
-                <p><span class="fw-bold">Subtotal:</span> ₡ 125,210</p>
-                <p><span class="fw-bold">Iva:</span> ₡ 300</p>
-                <p><span class="fw-bold">Total:</span> ₡ 125,210</p>
+                <p><span class="fw-bold">Subtotal:</span> <span id="subTotal">@Model.SubTotal.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
+                <p><span class="fw-bold">Iva:</span> <span id="iva">@Model.Iva.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
+                <p><span class="fw-bold">Total:</span> <span id="total">@Model.Total.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
                 <div class="border border-bottom my-3"></div>
-                <button type="button" class="btn w-100 btn-warning">Pay</button>
+                <button type="button" class="btn w-100 btn-warning" data-bs-toggle="modal" data-bs-target="#bill">Pay</button>
             </form>
     
         </div>
     </div>
 </div>
-@section Scripts{
-    <script src="~/js/"></script>
+
+<div class="modal fade" tabindex="-1" id="bill">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title ME-highlighted-text">RentME</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h3 class="primary-color">Invoice</h3>
+              <h5 class="fw-bold secondary-color d-flex justify-content-between">
+                  <div>Due to</div>   <div>03.13.2021</div> 
+              </h5>
+                <h5 class="d-flex justify-content-between">
+                  <div>House's name</div>   <div>House #7</div> 
+              </h5>
+                <h5 class="d-flex justify-content-between">
+                  <div>Price</div>   <div>$300,000.00</div> 
+              </h5>
+                              <h5 class="d-flex justify-content-between">
+                  <div>Months</div>   <div>1</div> 
+              </h5>
+                <h5 class="d-flex justify-content-between">
+                  <div>Date</div>   <div>03.13.2021 - 04.13.2021</div> 
+              </h5>                    
+              <div id="rent-cost">
+              <h4 class="fw-bold secondary-color d-flex justify-content-between ">
+                  <div>Rent</div>   <div>$600000.00</div> 
+              </h4>
+              @* <div class="d-flex justify-content-between">
+                  <p>House Price * Months</p>
+                  <p>$600000.00</p>
+              </div> *@
+          </div> 
+            <div id="service-cost">
+              <h4 class="fw-bold secondary-color d-flex justify-content-between">
+                  <div>Services</div>   <div>$73,000.00</div> 
+              </h4>
+              <div class="d-flex justify-content-between">
+                  <p>Surveillance 24/7</p>
+                  <p>$30,000.00</p>
+              </div>
+                <div class="d-flex justify-content-between">
+                  <p>Swimming Pool Maintenance</p>
+                  <p>$13,000.00</p>
+              </div>
+             <div class="d-flex justify-content-between">
+                  <p>House Insurance</p>
+                  <p>$30,000.00</p>
+              </div>
+          </div> 
+             <div id="subTotal-cost">
+              <h5 class="fw-bold secondary-color d-flex justify-content-between">
+                  <div>Sub Total</div>   <div>$373000.00</div> 
+              </h5>             
+            </div>
+            <div id="tax-cost">
+              <h5 class="fw-bold secondary-color d-flex justify-content-between">
+                  <div>Tax</div>   <div>$48490.00</div> 
+              </h5>             
+            </div>
+            <div id="total-cost">
+              <h3 class="fw-bold secondary-color primary-color d-flex justify-content-between">
+                  <div>Total</div>   <div>$421490.00 </div> 
+              </h3>             
+            </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-lg btn-success">Pay Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+    @section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0/build/global/luxon.min.js"></script>
+    <script src="https://unpkg.com/currency.js@2.0.3/dist/currency.min.js"></script>
+    <script src="~/js/Rent/RentHouse.js"></script>
 }
