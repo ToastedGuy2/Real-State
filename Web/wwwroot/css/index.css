@@ -3,31 +3,30 @@
 
 /* Main */
 /* END */
-#hobbit-background-image {
-    position: relative;
-    width: 100%;
-    background-image: url("../images/index-background-image.jpeg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-    /* background: url("../images/index-background-image.jpeg") center ; */
+#jumbotron {
+    background-image: url("../images/hobbit_home.jpg");
+    height: 50vh;
 }
-
-.discover-form {
-    display: inline-block;
+#jumbotron-mask{
+    background-color: rgba(0, 0, 0, 0.6);
 }
-
-.discover-title {
-    font-size: 3rem;
+#search-by-province-btn{
+    background-color: #961047;
     color: #fff;
-    font-weight: 700;
 }
-
-.rent-me-border-primary-color {
-    border-color: #961047 !important;
+#search-by-province-btn:hover,
+#search-by-province-btn:active{
+    background-color: #790535;
+    border-color: #790535;
 }
-
-.form-select:focus {
-    box-shadow: none;
+.form-select:focus{
+    border-color: #961047;
+    box-shadow: 0 0 0 0.25rem rgb(150 16 71 / 25%)
+}
+/* hr{
+    background-color: #961047;
+    height: 3px;
+} */
+.testimonial-text{
+    color: black;
 }

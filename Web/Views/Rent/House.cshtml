@@ -1,4 +1,4 @@
-@using System.Globalization
+@using Web.Helpers
 @{
     ViewData["Title"] = "House";
     var today = DateTime.Now.ToString("yyyy/MM/dd");
@@ -13,13 +13,14 @@
 @model RentHouseViewModel
 <div class="container-fluid my-3">
     <div class="row">
+        @* House's description *@
         <div class="col-lg-5 ">
             <img src="~/images/Houses/@Model.House.ImageName" class="img-fluid">
         </div>
         <div class="col-lg-4 mx-md-5 ">
             <h1 class="text-center">@Model.House.Name</h1>
             <p><span class="fw-bold text-muted">Price:</span><span
-                    class="badge bg-primary">@Model.House.Price.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))/month</span>
+                    class="badge bg-primary">@Model.House.Price.ToCurrency()/month</span>
             </p>
             <p class="">@Model.House.Description</p>
             <ul>
@@ -37,16 +38,16 @@
                 </li>
             </ul>
         </div>
+        @* FORM *@
         <div class="col-lg-2 border rounded border-2 py-3">
             <form action="post">
-                <input type="hidden" asp-for="House.Price">
+                <input type="hidden" asp-for="House.HouseId">
                 <h5 class="text-center fw-bold">Rent Details</h5>
                     <div class="mb-3">
-                    <label asp-for="From" class="form-label"></label><span class="text-danger">*</span>
-                    <input asp-for="From" class="form-control">
-                    @* <small class="text-muted">mm/dd/yyyy</small> *@
-                    <span asp-validation-for="From" class="text-danger"></span>
-                </div>
+                        <label asp-for="From" class="form-label"></label><span class="text-danger">*</span>
+                        <input asp-for="From" class="form-control">
+                        @* <span asp-validation-for="From" class="text-danger"></span> *@
+                    </div>
                 
                 <div class="mb-3">
                     <label asp-for="Months" class="form-label"></label><span class="text-danger">*</span>
@@ -58,30 +59,32 @@
                         <input asp-for="To" class="form-control" disabled>
                 </div>
                 <div class="border border-bottom my-3"></div>
+                @* <hr> *@
                 <h5 class="text-center fw-bold">Services</h5>
                 @foreach (var service in Model.ServicesToDisplay)
                 {
                     <div class="form-check">
-                        <input type="checkbox" name="service" value="@service.Price" class="form-check-input" >
+                        <input type="checkbox" name="services" value="@service.ServiceId" class="form-check-input" >
                         <label class="form-check-label" > 
-                            @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span>
+                            @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
                         </label>
                     </div>
                 }
 
                 <div class="border border-bottom my-3"></div>
                 <h5 class="text-center fw-bold">Costs</h5>
-                <p><span class="fw-bold">Subtotal:</span> <span id="subTotal">@Model.SubTotal.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
-                <p><span class="fw-bold">Iva:</span> <span id="iva">@Model.Iva.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
-                <p><span class="fw-bold">Total:</span> <span id="total">@Model.Total.ToString("C",CultureInfo.CreateSpecificCulture("en-US"))</span></p>
+                <p><span class="fw-bold">Subtotal:</span> <span id="subTotal">@Model.SubTotal.ToCurrency()</span></p>
+                <p><span class="fw-bold">Iva:</span> <span id="iva">@Model.Iva.ToCurrency()</span></p>
+                <p><span class="fw-bold">Total:</span> <span id="total">@Model.Total.ToCurrency()</span></p>
                 <div class="border border-bottom my-3"></div>
-                <button type="button" class="btn w-100 btn-warning" data-bs-toggle="modal" data-bs-target="#bill">Pay</button>
+
+                <button type="button" class="btn w-100 btn-success">Continue</button>
             </form>
     
         </div>
     </div>
 </div>
-
+@* MODAL *@
 <div class="modal fade" tabindex="-1" id="bill">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -156,6 +159,7 @@
 </div>
     @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
+    <script src="~/lib/node_modules/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0/build/global/luxon.min.js"></script>
     <script src="https://unpkg.com/currency.js@2.0.3/dist/currency.min.js"></script>

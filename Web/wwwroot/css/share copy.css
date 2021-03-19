@@ -1,0 +1,123 @@
+/* Global
+/* html {
+    position: relative;
+} */
+
+body {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 20px;
+    /* position: relative; */
+}
+
+/* Nav */
+.navbar {
+    background-color: #fcf4ec;
+    border-bottom: 3px solid #961047;
+}
+
+span.navbar-brand-name {
+    font-size: 30px;
+    font-weight: 700;
+    color: #961047;
+}
+
+.ME-highlighted-text {
+    font-weight: 900;
+    color: #961047;
+}
+
+.rent-me-primary-color {
+    color: #961047;
+}
+
+a.nav-link {
+    color: #14445c !important;
+    font-weight: 900;
+}
+
+.nav-link:hover,
+.nav-link:active {
+    color: #961047 !important;
+}
+
+#sign-up-btn {
+    background-color: #961047;
+    border-color: #961047;
+    color: #fcf4ec;
+    /* margin: 0px 0.5rem; */
+}
+
+#sign-up-btn:hover,
+#sign-up-btn:active {
+    background-color: rgba(150, 16, 71, 0.9);
+    color: #fcf4ec
+}
+
+#sign-up-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(150 16 71 / 50%);
+}
+
+#login-btn {
+    border-color: #14445c;
+    color: #14445c;
+    /* margin: 0px 0.5rem; */
+}
+
+#login-btn:hover,
+#login-btn:active {
+    background-color: #14445c;
+    color: #fcf4ec
+}
+
+#login-btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(20 68 92 / 50%);
+    background-color: #14445c;
+    color: #fcf4ec
+}
+
+a.current {
+    color: #961047 !important;
+}
+
+.primary-color {
+    color: #961047 !important;
+    font-weight: 700 !important;
+}
+
+.body {
+    /* position: relative; */
+}
+
+.footer {
+    background-color: #fcf4ec;
+    color: #961047;
+    font-weight: 700;
+    border-top: 3px solid #961047;
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; */
+
+}
+
+#viewport {
+    height: 100vh;
+    width: 0vw;
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+    background: transparent;
+}
+
+.current {
+    color: #961047;
+}
+
+.secondary-color {
+    color: #14445c;
+    font-weight: 700;
+}
+
+.bg-third-color {
+    background-color: #fcf4ec;
+} 

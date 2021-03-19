@@ -1,0 +1,33 @@
+/* Index */
+
+
+/* Main */
+/* END */
+#jumbotron {
+    position: relative;
+    width: 100%;
+    background-image: url("../images/index-background-image.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    /* background: url("../images/index-background-image.jpeg") center ; */
+}
+
+.discover-form {
+    display: inline-block;
+}
+
+.discover-title {
+    font-size: 3rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.rent-me-border-primary-color {
+    border-color: #961047 !important;
+}
+
+.form-select:focus {
+    box-shadow: none;
+}

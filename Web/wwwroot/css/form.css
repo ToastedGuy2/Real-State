@@ -1,21 +1,16 @@
-#sign-up-here {
-    color: #961047;
+body{
+    background-color: #eee;
+}
+.form-container {
+    max-width: 425px;
+}
+.form-button{
+    background-color: #14445c;
+    color: #fff;
+}
+.form-button:hover,
+.form-button:active{
+    background-color: #09405c;
+    color: #fff;
 }
 
-#sign-up-here:hover,
-#sign-up-here:focus {
-    color: #14445c;
-}
-
-form {
-    max-width: 500px;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover,
-a:focus {
-    color: #14445c;
-}

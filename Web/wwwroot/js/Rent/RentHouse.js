@@ -28,22 +28,6 @@ const housePrice = parseFloat(document.getElementById('House_Price').value);
 let nodeServices = document.getElementsByName('service');
 let serviceList = Array.prototype.slice.call(nodeServices)
 
-// Functions
-const monthsSubTotal = () => {
-    monthsValue = Number(monthsInput.value)
-    return housePrice * monthsValue;;
-}
-
-const servicesSubTotal = () => {
-    let servicesChecked = Array.prototype.slice.call(document.querySelectorAll('input[name=service]:checked'));
-    return servicesChecked.reduce((accumulator, service) => accumulator + parseFloat(service.value), 0);
-}
-
-
-const rentSubTotal = () => monthsSubTotal() + servicesSubTotal();
-const rentIva = () => rentSubTotal() * 0.13;
-const rentTotal = () => rentSubTotal() + rentIva();
-
 
 const changeCosts = () => {
     subTotalSpan.textContent = "$" + currency(rentSubTotal());

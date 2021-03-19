@@ -1,23 +1,13 @@
-/* Global */
-
-body {
-    font-family: 'Source Sans Pro', sans-serif !important;
-    font-size: 20px;
+#about-jumbotron{
+    background-image: url('../images/About.jpeg');
+    height: 200px;
 }
-
-.current {
-    color: #91171f !important;
+h1{
+    font-family: 'Chango', cursive;
+    color: black;
 }
-
-.developer-photo {
-    max-height: 500px;
-    max-width: 400px;
-}
-
-.developer-description {
-    line-height: 1.5;
-}
-
-footer {
-    border-top: 3px solid #91171f;
+p.definition{
+    /* font-family: 'Ranchers', cursive; */
+    font-family: 'Montserrat', sans-serif;
+    color: black;
 }

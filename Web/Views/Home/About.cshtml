@@ -1,35 +1,51 @@
 @{
     ViewData["Title"] = "About";
 }
+@section FONTS{
+<link href="https://fonts.googleapis.com/css2?family=Chango&family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+}
 @section CSS{
     <link rel="stylesheet" href="~/css/about.css">
 }
+
+
 <div class="container">
-    <div class="row justify-content-center">
-            <div class="developer col-lg-6 col-md-8 text-center">
-                <h1 class="my-4 fw-bold">Meet the Creator of <span class="primary-color">RentME</span></span></h1>
-                    <img src="~/images/It's me.jpeg" alt="" class="developer-photo border rounded-pill">
-                    <p class="developer-description mt-sm-3">My name is <strong>Kevin Jose Ordoñez Zelaya</strong>. I am a software engineer student at UTN, who
-                        already got a
-                        diploma and
-                        currently working to get a bachelor’s degree. I am a proactive person, who's always looking new ways
-                        to learn and imp    rove
-                        my skillset.I'm always open to learn new things and share my experience during the years I've been
-                        studying.
-                    </p>
-            </div>
-    </div>
-    <div class="row my-3 justify-content-center">
-        <div class="col-lg-6 col-md-8">
-            <h2 class="mb-3 fw-bold text-center">Contact Information</h2>
-            <p><span class="primary-color"><strong>Phone Number:</strong></span> 8682-3064/6802-5321</p>
-            <p><span class="primary-color"><strong>Email:</strong></span> RentME@protonmail.com</p>
-            <p><span class="primary-color"><strong>Location:</strong></span> Heredia, Santo Domingo, 1Km North the firemen station</p>
-            <p>We are open on weekdays from 8am to 6:00pm</p>
+    @* About us *@
+    <div class="row align-items-center justify-content-center" id="about-section">
+        <div class="col-5">
+            <h1 class="display-1">What is <span class="primary-color bold">RentME</span>?</h1>
+            <p class="display-6 definition"><span class="primary-color bold">RentME</span> is like Jack and the Beanstalk’s goose that lays golden eggs. It’s something that pays you month after month, whether you are working or not.</p>
+        </div>
+        <div class="col-4">
+            <img src="~/images/About.jpeg" alt="" class="img-fluid shadow-2-strong">
         </div>
     </div>
+    @* Meet the author of RentME *@
+    @* <div class="row align-items-center justify-content-center" id="meet-our-team-section">
+        <div class="col-3">
+            <img src="~/images/It's me.jpg" alt="" class="img-fluid shadow-2-strong rounded-circle">
+        </div>
+    </div> *@
+    <div class="row justify-content-center" id="meet-our-team-section">
+        <div class="col-9">
+            <h1 class="display-6 text-center">Meet the author of <span class="primary-color bold">RentME</span></h1>
+            <div class="row justify-content-center">
+                <div class="col-4 my-4">
+                    <img src="~/images/It's me.jpg" alt="" class="img-fluid shadow-2-strong rounded-circle">
+                </div>
+                <div></div>
+                <div class="col-8">
+                    <p class="lead definition text-center">Hello there!! My name is <span class="bold">Kevin Jose Ordoñez Zelaya</span>. I am a software engineer student, who already got a diploma and 
+                        currently working to get a bachelor’s degree. I am a proactive person, who's always looking new ways
+                        to learn and improve my skillset.I'm always open to learn new things and share my experience during the years I've been
+                        studying.
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 @section scripts{
     <script src="~/js/about.js"></script>

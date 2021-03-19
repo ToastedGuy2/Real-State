@@ -56,4 +56,4 @@ features.forEach(feature => {
 })
 
 
-document.getElementById('rent-link').classList.add('current');
+document.getElementById('rent-link').classList.add('current-page');
