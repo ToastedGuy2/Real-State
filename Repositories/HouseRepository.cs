@@ -53,8 +53,9 @@ namespace Repositories
         {
             return _context.Houses.
             Include(h => h.Province).
-            Include(h => h.Features).
             Include(h => h.Services).
+            Include(h => h.Features).
+            ThenInclude(hF => hF.Feature).
             OrderBy(h => h.Name);
         }
     }

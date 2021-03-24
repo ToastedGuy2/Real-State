@@ -17,7 +17,8 @@ namespace Web.Profiles
             .ReverseMap();
             CreateMap<House, HouseDto>()
             .ForMember(dest => dest.ImageUrl, source => source.MapFrom(source => $"/images/Houses/{source.ImageName}"))
-            .ForMember(dest => dest.FeaturesId, source => source.MapFrom(source => source.Features.Select(f => f.FeatureId).ToArray()));
+            .ForMember(dest => dest.Province, source => source.MapFrom(source => source.Province.Name))
+            .ForMember(dest => dest.Features, source => source.MapFrom(source => source.Features.Select(f => f.Feature.Name).ToArray()));
         }
     }
 }

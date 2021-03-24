@@ -1,22 +1,26 @@
 @{
     ViewData["Title"] = "List";
 }
+
 @model RentListViewModel
 @section CSS{
     <link rel="stylesheet" href="~/css/rentList.css">
+    <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
 }
 <div class="container-fluid my-3">
     <div class="row">
         @* <div class="col-lg-2 col-md-2 col-sm-5 d-none-sm"> *@
-        <div class="col-lg-2 col-md-2 col-sm-5 d-none-sm">
+        <div class=" d-none d-md-block col-lg-2">
             <div id="filter-list">
                 <div id="feature-list">
                     <h3>Features</h3>
                     @foreach (var feature in @Model.Features)
                     {
                         <div class="feature-item">
-                            <input type="checkbox" class="form-check-input" value="@feature.FeatureId" name="feature">
-                                @feature.Name
+                            <div class="form-check ms-2">
+                                <input type="checkbox" class="form-check-input" value="@feature.Name" />
+                                <label class="form-check-label" for="flexCheckDefault"> @feature.Name </label>
+                            </div>
                         </div>
                     }
                 </div>
@@ -24,28 +28,40 @@
                     <h3>Provinces</h3>
                     @foreach (var province in @Model.Provinces)
                     {
+                        if(province.Name != Model.ProvinceToCheck){
                         <div class="province-item">
-                            <input type="checkbox" class="form-check-input me-2" value="@province.ProvinceId" name="selectedProvinces">
-                                @province.Name
+                            <div class="form-check ms-2">
+                                <input type="checkbox" class="form-check-input" value="@province.Name" />
+                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
+                            </div>
                         </div>
+                        }
+                        else{
+                            <div class="province-item">
+                                <input type="checkbox" class="form-check-input me-2" value="@province.Name" name="province" checked>
+                                    @province.Name
+                            </div>
+                        }
+
                     }
                 </div>
             </div>
         </div>
-        <div class="col-lg-10 col-md-10 col-sm-7 border-start border-3" id="rent-houses-container">
-            <div class="container-fluid">
+        <div class="col" id="rent-houses-container">
                 <div class="row" id="houseCards">
                         @foreach (var house in @Model.Houses)
                         {
-                            <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
                                     <div class="card">
                                         <img src="~/images/Houses/@house.ImageName" class="card-img-top">
                                         <div class="card-body">
-                                            <h3 class="card-title mb-2">₡@house.Price.ToString("N0")/month</h3>
-                                            <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-bed"></i> @house.Bedrooms Bedroom --- <i class="fas fa-toilet-paper"></i>
-                                                @house.Bathrooms Bathroom
-                                            </h6>
-                                            <p class="card-text"> @house.Name - @house.Province.Name </p>
+                                            <h2 class="card-title secondary-color mb-2">@house.Price.ToCurrency()</h2>
+                                            <p class="card-subtitle mb-2 d-flex"><span class="me-1 me-md-2"><i class="fas fa-bed"></i> @house.Bedrooms Bd</span> <span>
+                                                <i class="fas fa-toilet-paper"></i>
+                                                    @house.Bathrooms Ba
+                                            </span>
+                                            </p>
+                                            <p class="card-text"> <span><i class="fas fa-search-location"></i> @house.Province.Name</span> </p>
                                             <p class="card-text"> <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-outline-primary btn-sm w-100 see-details-btn"><i
                                                     class="fas fa-eye"></i> See more
                                                 details</a></p>
@@ -55,12 +71,12 @@
                             </div>
                         }
                 </div>
-            </div>
         </div>
     </div>
 </div>
 
 @section scripts{
-    <script src="~/lib/node_modules/axios/dist/axios.min.js"></script>
+    <script src="~/lib/notyf/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="~/js/Rent/RentList.js"></script>
 }

@@ -30,14 +30,15 @@ namespace Web.Controllers
             _autoMapper = autoMapper;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string province = null)
         {
             await Task.Yield();
             var model = new RentListViewModel()
             {
-                Houses = _houseService.GetAll(),
+                Houses = province == null ? _houseService.GetAll().OrderBy(h => h.Price) : _houseService.GetAll().Where(h => h.Province.Name == province).OrderBy(h => h.Price),
                 Features = _featureService.GetAll(),
-                Provinces = _provinceService.GetAll()
+                Provinces = _provinceService.GetAll(),
+                ProvinceToCheck = province
             };
 
             return View(model);
@@ -54,7 +55,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            var houseServices = _serviceService.GetAll().Where(s => house.Services.Any(hs => hs.ServiceId == s.ServiceId)); 
+            var houseServices = _serviceService.GetAll().Where(s => house.Services.Any(hs => hs.ServiceId == s.ServiceId));
             var model = new RentHouseViewModel
             {
                 House = house,

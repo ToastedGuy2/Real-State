@@ -1,19 +1,20 @@
+@model IndexViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 @section CSS{
     <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
 }
 <div class="bg-image text-white" id="jumbotron">
     <div class="mask d-flex justify-content-center align-items-center" id="jumbotron-mask">
-        <form method="POST" class="px-3 px-sm-0">
+        <form method="POST" asp-controller="Home" asp-action="Index" class="px-3" id="search-province-form">
             <h1 class="text-center display-1">Discover a place
                 you'll love to live</h1>
             <div class="input-group">
-                <select class="form-select form-select-lg" id="inputGroupSelect04"
-                    aria-label="Example select with button addon">
-                    <option selected>Choose...</option>
+                <select asp-for="SelectedProvince" asp-items="Model.Provinces" class="form-select form-select-lg">
+                    <option value="0" selected>Pick a province</option>
                 </select>
                 <button class="btn btn-lg" type="submit" id="search-by-province-btn"><i class="fas fa-search"></i></button>
             </div>
@@ -102,5 +103,7 @@
 
 
     @section Scripts{
+        <script src="~/lib/notyf/notyf.min.js"></script>
         <script src="~/js/index.js"></script>
+
     }

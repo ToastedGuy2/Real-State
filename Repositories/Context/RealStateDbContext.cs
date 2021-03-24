@@ -134,7 +134,7 @@ namespace Repositories.Context
                 {
                     HouseId = 1,
                     Name = "House #1",
-                    Price = 100000,
+                    Price = 200,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 1,
                     Bedrooms = 1,
@@ -147,7 +147,7 @@ namespace Repositories.Context
                 {
                     HouseId = 2,
                     Name = "House #2",
-                    Price = 125000,
+                    Price = 250,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 2,
                     Bedrooms = 2,
@@ -160,7 +160,7 @@ namespace Repositories.Context
                 {
                     HouseId = 3,
                     Name = "House #3",
-                    Price = 155000,
+                    Price = 300,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 1,
                     Bedrooms = 2,
@@ -173,7 +173,7 @@ namespace Repositories.Context
                 {
                     HouseId = 4,
                     Name = "House #4",
-                    Price = 250000,
+                    Price = 500,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 2,
                     Bedrooms = 4,
@@ -186,7 +186,7 @@ namespace Repositories.Context
                 {
                     HouseId = 5,
                     Name = "House #5",
-                    Price = 330000,
+                    Price = 660,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 3,
                     Bedrooms = 3,
@@ -199,7 +199,7 @@ namespace Repositories.Context
                 {
                     HouseId = 6,
                     Name = "House #6",
-                    Price = 210000,
+                    Price = 420,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 3,
                     Bedrooms = 2,
@@ -212,7 +212,7 @@ namespace Repositories.Context
                 {
                     HouseId = 7,
                     Name = "House #7",
-                    Price = 300000,
+                    Price = 600,
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                     Bathrooms = 2,
                     Bedrooms = 4,
@@ -433,35 +433,35 @@ namespace Repositories.Context
                 {
                     ServiceId = 1,
                     Name = "Surveillance 24/7",
-                    Price = 30000,
+                    Price = 60,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 2,
                     Name = "Swimming Pool Maintenance",
-                    Price = 13000,
+                    Price = 26,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 3,
                     Name = "Garden",
-                    Price = 25000,
+                    Price = 50,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 4,
                     Name = "House Insurance",
-                    Price = 30000,
+                    Price = 60,
                     Description = "lorem ipsum"
                 },
                 new Service()
                 {
                     ServiceId = 5,
                     Name = "Solar Panels",
-                    Price = 9000,
+                    Price = 18,
                     Description = "lorem ipsum"
                 }
                 );

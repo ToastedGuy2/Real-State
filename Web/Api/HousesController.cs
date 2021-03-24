@@ -23,10 +23,9 @@ namespace Web.Api
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<HouseDto>>> GetHouses()
+        public ActionResult<IEnumerable<HouseDto>> GetHouses()
         {
             // TODO: Your code here
-            await Task.Yield();
             var houseEntities = _houseService.GetAll();
             var response = _mapper.Map<IEnumerable<HouseDto>>(houseEntities);
             return Ok(response);

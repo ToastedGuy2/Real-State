@@ -6,7 +6,7 @@
 @section CSS{
     <link rel="stylesheet" href="~/css/form.css">
 }
-<form id="account-form" class="p-4 rounded-3 shadow " asp-controller="Account" asp-action="Login" method="post">
+<form class="p-4 rounded-3 shadow" method="post" asp-controller="Account" asp-action="Login">
     <h2 class="text-center secondary-color "><i class="fas fa-user-circle"></i> LOGIN</h2>
     @if(@TempData["ShowLoginErrors"]!=null){
         <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
@@ -30,7 +30,7 @@
         <label asp-for="RememberMe" class="form-check-label"></label>
     </div>
 
-    <button type="submit" class="w-100 btn form-button">Login</button>
+    <button type="submit" class="btn form-button w-100">Login</button>
 </form>
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>

@@ -7,44 +7,36 @@
     <link rel="stylesheet" href="~/css/form.css">
 }
 
-        <form id="account-form" class="bg-light mx-auto shadow mt-lg-5 mt-sm-3 p-4 border border-2 rounded-3" asp-controller="Account" asp-action="SignUp" method="post">
-    <h1 class="text-center"><a asp-controller="Home" asp-action="Index" class="primary-color">RentME</a></h1>
+<form id="account-form" class="p-4 rounded-3 shadow" asp-controller="Account" asp-action="SignUp" method="post">
     <h2 class="text-center secondary-color"><i class="fas fa-user-circle"></i> Sign Up</h2>            
-            @if(@TempData["IdentityErrors"]!=null){
-                var errorList = (string[]) @TempData["IdentityErrors"];
-                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                    @foreach (var error in errorList)
-                    {
-                        @error
-                        <br>
-                    }
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                }
-            <div class="mb-2">
-                <label asp-for="FullName" class="form-label"></label>
-                <input asp-for="FullName" class="form-control" placeholder="Lore ipsum">
-                <span class="text-danger" asp-validation-for="FullName"></span>
-            </div>
-            <div class="mb-2">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="example@example.com" />
-                <span class="text-danger" asp-validation-for="Email"></span>
-            </div>
-            <div class="mb-2">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" placeholder="**********" />
-                <span class="text-danger" asp-validation-for="Password">
-                </span>
-            </div>
-            <div class="mb-2">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="**********" />
-                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
-            </div>
-            <button id="type="submit" class="btn btn-primary w-100 my-2">Sign Up</button>
-            <a asp-action="Login" class="btn btn-danger w-100">Cancel</a>
-        </form>
+    @if(@TempData["IdentityErrors"]!=null){
+        var errorList = (string[]) @TempData["IdentityErrors"];
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            @foreach (var error in errorList)
+            {
+                @error
+                <br>
+            }
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        }
+    <div class="form-outline mt-4">
+        <input asp-for="FullName" class="form-control">
+        <label asp-for="FullName" class="form-label"></label>
+    </div>
+    <span class="text-danger" asp-validation-for="FullName"></span>
+    <div class="form-outline mt-4">
+        <input asp-for="Password" class="form-control">
+        <label asp-for="Password" class="form-label"></label>
+    </div>
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <div class="form-outline mt-4">
+        <input asp-for="ConfirmPassword" class="form-control">
+        <label asp-for="ConfirmPassword" class="form-label"></label>
+    </div>
+    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    <button type="submit" class="btn form-button w-100 mt-4">CREATE ACCOUNT</button>
+</form>
 @section Scripts{
     <partial name="_ValidationScriptsPartial"/>
 }
