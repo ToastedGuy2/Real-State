@@ -17,10 +17,9 @@ namespace Repositories.Context
         public DbSet<HouseService> HouseServices { get; set; }
         public DbSet<Province> Provinces { get; set; }
 
-        public DbSet<Bill> Bills { get; set; }
-        public DbSet<BillService> BillServices { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceService> InvoiceServices { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
 
 
 
@@ -61,9 +60,9 @@ namespace Repositories.Context
 
             // User
 
-            // User to Bill
+            // User to Invoice
             modelBuilder.Entity<AppUser>().
-                HasMany(u => u.Bills).
+                HasMany(u => u.Invoices).
                 WithOne(b => b.Customer).
                 HasForeignKey(b => b.CustomerId).OnDelete(DeleteBehavior.NoAction); ;
 
@@ -91,30 +90,25 @@ namespace Repositories.Context
                 .HasForeignKey(b => b.ProvinceId).OnDelete(DeleteBehavior.NoAction); ;
             ;
 
-            // Bill - BillService - Service
-            modelBuilder.Entity<BillService>()
-                .HasKey(bS => new { bS.BillId, bS.ServiceId });
+            // Invoice - InvoiceService - Service
+            modelBuilder.Entity<InvoiceService>()
+                .HasKey(bS => new { bS.InvoiceId, bS.ServiceId });
 
-            modelBuilder.Entity<BillService>()
-                .HasOne(bS => bS.Bill)
+            modelBuilder.Entity<InvoiceService>()
+                .HasOne(bS => bS.Invoice)
                 .WithMany(b => b.Services)
-                .HasForeignKey(bS => bS.ServiceId).OnDelete(DeleteBehavior.NoAction); ;
+                .HasForeignKey(bS => bS.InvoiceId).OnDelete(DeleteBehavior.NoAction); ;
             ;
 
-            modelBuilder.Entity<BillService>()
+            modelBuilder.Entity<InvoiceService>()
                 .HasOne(bS => bS.Service)
-                .WithMany(s => s.Bills)
-                .HasForeignKey(bs => bs.BillId).OnDelete(DeleteBehavior.NoAction); ;
+                .WithMany(s => s.Invoices)
+                .HasForeignKey(bs => bs.ServiceId).OnDelete(DeleteBehavior.NoAction); ;
             ;
 
-            modelBuilder.Entity<Bill>()
-                .HasOne(b => b.PaymentMethod)
-                .WithMany(b => b.Bills)
-                .HasForeignKey(b => b.PaymentMethodId).OnDelete(DeleteBehavior.NoAction);
-            ;
             // Service
             //Build - BuildService - Service
-            // Bill - BillService - Service
+            // Invoice - InvoiceService - Service
             modelBuilder.Entity<HouseService>()
                 .HasKey(bS => new { bS.HouseId, bS.ServiceId });
 
@@ -135,7 +129,7 @@ namespace Repositories.Context
                     HouseId = 1,
                     Name = "House #1",
                     Price = 200,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "Sex reached suppose our whether. Oh really by an manner sister so. One sportsman tolerably him extensive put she immediate. He abroad of cannot looked in. Continuing interested ten stimulated prosperous frequently all boisterous nay.",
                     Bathrooms = 1,
                     Bedrooms = 1,
                     Size = 100,
@@ -148,7 +142,7 @@ namespace Repositories.Context
                     HouseId = 2,
                     Name = "House #2",
                     Price = 250,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "Extremity direction existence as dashwoods do up. Securing marianne led welcomed offended but offering six raptures. Conveying concluded newspaper rapturous oh at. Two indeed suffer saw beyond far former mrs remain.",
                     Bathrooms = 2,
                     Bedrooms = 2,
                     Size = 300,
@@ -161,7 +155,7 @@ namespace Repositories.Context
                     HouseId = 3,
                     Name = "House #3",
                     Price = 300,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "And produce say the ten moments parties. Simple innate summer fat appear basket his desire joy. Outward clothes promise at gravity do excited. Sufficient particular impossible by reasonable oh expression is. ",
                     Bathrooms = 1,
                     Bedrooms = 2,
                     Size = 180,
@@ -174,7 +168,7 @@ namespace Repositories.Context
                     HouseId = 4,
                     Name = "House #4",
                     Price = 500,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "His followed carriage proposal entrance directly had elegance. Greater for cottage gay parties natural. Remaining he furniture on he discourse suspected perpetual. Power dried her taken place day ought the. Four and our ham west miss. ",
                     Bathrooms = 2,
                     Bedrooms = 4,
                     Size = 225,
@@ -187,7 +181,7 @@ namespace Repositories.Context
                     HouseId = 5,
                     Name = "House #5",
                     Price = 660,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "Affronting everything discretion men now own did. Still round match we to. Frankness pronounce daughters remainder extensive has but. Happiness cordially one determine concluded fat. Plenty season beyond by hardly giving of. ",
                     Bathrooms = 3,
                     Bedrooms = 3,
                     Size = 500,
@@ -200,7 +194,7 @@ namespace Repositories.Context
                     HouseId = 6,
                     Name = "House #6",
                     Price = 420,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "Four and our ham west miss. Education shameless who middleton agreement how. We in found world chief is at means weeks smile. ",
                     Bathrooms = 3,
                     Bedrooms = 2,
                     Size = 190,
@@ -213,14 +207,114 @@ namespace Repositories.Context
                     HouseId = 7,
                     Name = "House #7",
                     Price = 600,
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    Description = "Discovered her his pianoforte insipidity entreaties. Began he at terms meant as fancy. Breakfast arranging he if furniture we described on. Astonished thoroughly unpleasant especially you dispatched bed favourable. ",
                     Bathrooms = 2,
                     Bedrooms = 4,
                     Size = 260,
                     IsItAvailable = true,
                     ProvinceId = 7,
                     ImageName = "House7.jpeg"
-                });
+                },
+                new House()
+                {
+                    HouseId = 8,
+                    Name = "House #8",
+                    Price = 430,
+                    Description = "Astonished thoroughly unpleasant especially you dispatched bed favourable.",
+                    Bathrooms = 1,
+                    Bedrooms = 2,
+                    Size = 200,
+                    IsItAvailable = true,
+                    ProvinceId = 1,
+                    ImageName = "House8.jpg"
+                },
+                new House()
+                {
+                    HouseId = 9,
+                    Name = "House #9",
+                    Price = 290,
+                    Description = "Astonished thoroughly unpleasant especially you dispatched bed favourable.",
+                    Bathrooms = 2,
+                    Bedrooms = 3,
+                    Size = 300,
+                    IsItAvailable = true,
+                    ProvinceId = 2,
+                    ImageName = "House9.jpg"
+                },
+                new House()
+                {
+                    HouseId = 10,
+                    Name = "House #10",
+                    Price = 265,
+                    Description = "Discovered her his pianoforte insipidity entreaties.",
+                    Bathrooms = 2,
+                    Bedrooms = 3,
+                    Size = 1223,
+                    IsItAvailable = true,
+                    ProvinceId = 3,
+                    ImageName = "House10.jpg"
+                }, new House()
+                {
+                    HouseId = 11,
+                    Name = "House #11",
+                    Price = 400,
+                    Description = "We in found world chief is at means weeks smile.",
+                    Bathrooms = 2,
+                    Bedrooms = 4,
+                    Size = 1223,
+                    IsItAvailable = true,
+                    ProvinceId = 4,
+                    ImageName = "House11.jpg"
+                }, new House()
+                {
+                    HouseId = 12,
+                    Name = "House #12",
+                    Price = 400,
+                    Description = "Four and our ham west miss. Education shameless who middleton agreement how.",
+                    Bathrooms = 1,
+                    Bedrooms = 4,
+                    Size = 1111,
+                    IsItAvailable = true,
+                    ProvinceId = 5,
+                    ImageName = "House12.jpg"
+                }, new House()
+                {
+                    HouseId = 13,
+                    Name = "House #13",
+                    Price = 300,
+                    Description = "Four and our ham west miss. Education shameless who middleton agreement how.",
+                    Bathrooms = 1,
+                    Bedrooms = 4,
+                    Size = 123,
+                    IsItAvailable = true,
+                    ProvinceId = 5,
+                    ImageName = "House13.jpg"
+                }, new House()
+                {
+                    HouseId = 14,
+                    Name = "House #14",
+                    Price = 300,
+                    Description = "Four and our ham west miss. Education shameless who middleton agreement how.",
+                    Bathrooms = 2,
+                    Bedrooms = 5,
+                    Size = 325,
+                    IsItAvailable = true,
+                    ProvinceId = 6,
+                    ImageName = "House14.jpg"
+                }, new House()
+                {
+                    HouseId = 15,
+                    Name = "House #15",
+                    Price = 1200,
+                    Description = "Four and our ham west miss. Education shameless who middleton agreement how.",
+                    Bathrooms = 2,
+                    Bedrooms = 5,
+                    Size = 100,
+                    IsItAvailable = true,
+                    ProvinceId = 7,
+                    ImageName = "House15.jpg"
+                }
+                );
 
             modelBuilder.Entity<HouseFeature>().HasData(
                    new HouseFeature()
@@ -357,6 +451,167 @@ namespace Repositories.Context
                    {
                        HouseId = 7,
                        FeatureId = 6,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 1,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 3,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 4,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 5,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 8,
+                       FeatureId = 6,
+                   }
+                   ,
+                   new HouseFeature()
+                   {
+                       HouseId = 9,
+                       FeatureId = 1,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 9,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 9,
+                       FeatureId = 5,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 9,
+                       FeatureId = 6,
+                   }
+                    ,
+                   new HouseFeature()
+                   {
+                       HouseId = 10,
+                       FeatureId = 1,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 10,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 10,
+                       FeatureId = 5,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 10,
+                       FeatureId = 6,
+                   }
+                    ,
+                   new HouseFeature()
+                   {
+                       HouseId = 11,
+                       FeatureId = 1,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 11,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 11,
+                       FeatureId = 4,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 11,
+                       FeatureId = 6,
+                   }
+                    ,
+                   new HouseFeature()
+                   {
+                       HouseId = 12,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 12,
+                       FeatureId = 3,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 12,
+                       FeatureId = 5,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 12,
+                       FeatureId = 6,
+                   }
+                    ,
+                   new HouseFeature()
+                   {
+                       HouseId = 13,
+                       FeatureId = 1,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 13,
+                       FeatureId = 2,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 13,
+                       FeatureId = 3,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 13,
+                       FeatureId = 4,
+                   }
+                    ,
+                   new HouseFeature()
+                   {
+                       HouseId = 14,
+                       FeatureId = 3,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 14,
+                       FeatureId = 4,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 14,
+                       FeatureId = 5,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 14,
+                       FeatureId = 6,
+                   },
+                   new HouseFeature()
+                   {
+                       HouseId = 15,
+                       FeatureId = 1,
                    }
                 );
             modelBuilder.Entity<Feature>().HasData(
@@ -585,6 +840,73 @@ namespace Repositories.Context
                {
                    HouseId = 7,
                    ServiceId = 5,
+               },
+               new HouseService()
+               {
+                   HouseId = 8,
+                   ServiceId = 1,
+               },
+               new HouseService()
+               {
+                   HouseId = 9,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 10,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 10,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 11,
+                   ServiceId = 5,
+               }
+               ,
+               new HouseService()
+               {
+                   HouseId = 12,
+                   ServiceId = 2,
+               },
+               new HouseService()
+               {
+                   HouseId = 12,
+                   ServiceId = 3,
+               },
+               new HouseService()
+               {
+                   HouseId = 12,
+                   ServiceId = 4
+               },
+               new HouseService()
+               {
+                   HouseId = 12,
+                   ServiceId = 5,
+               }
+               ,
+               new HouseService()
+               {
+                   HouseId = 13,
+                   ServiceId = 4,
+               },
+               new HouseService()
+               {
+                   HouseId = 13,
+                   ServiceId = 5,
+               },
+               new HouseService()
+               {
+                   HouseId = 14,
+                   ServiceId = 1
+               },
+               new HouseService()
+               {
+                   HouseId = 15,
+                   ServiceId = 2,
                }
             );
 

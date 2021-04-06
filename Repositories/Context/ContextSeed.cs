@@ -55,6 +55,16 @@ namespace IdentityProject.Data
 
             await TryToAddUser(userManager, customer, Roles.Customer.ToString());
 
+            var customer2 = new AppUser()
+            {
+                Email = "customer2@customer2.com",
+                UserName = "customer2@customer2.com",
+                FullName = "Customer2 Customer2",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true
+            };
+
+            await TryToAddUser(userManager, customer2, Roles.Customer.ToString());
         }
         private static async Task TryToAddUser(UserManager<AppUser> userManager, AppUser userToAdd, string role)
         {
@@ -73,30 +83,3 @@ namespace IdentityProject.Data
     }
 }
 
-
-// var usersToSeed = new AppUser[]{
-//     new AppUser()
-//     {
-//         Email = "superadmin@superadmin.com",
-//         UserName = "superadmin",
-//         FullName = "Super Admin",
-//         EmailConfirmed = true,
-//         PhoneNumberConfirmed = true
-//     },
-//     new AppUser()
-//     {
-//         Email = "admin@admin.com",
-//         UserName = "admin",
-//         FullName = "Admin Admin",
-//         EmailConfirmed = true,
-//         PhoneNumberConfirmed = true
-//     },
-//     new AppUser()
-//     {
-//         Email = "customer@customer.com",
-//         UserName = "customer",
-//         FullName = "Customer Customer",
-//         EmailConfirmed = true,
-//         PhoneNumberConfirmed = true
-//     }
-// };

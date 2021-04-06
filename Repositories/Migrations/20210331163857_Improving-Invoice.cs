@@ -3,37 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repositories.Migrations
 {
-    public partial class SeedServicesData : Migration
+    public partial class ImprovingInvoice : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "AppUserRole",
-                columns: table => new
-                {
-                    AppUserRoleId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserRole", x => x.AppUserRoleId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Feature",
                 columns: table => new
@@ -48,19 +21,6 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentMethod",
-                columns: table => new
-                {
-                    PaymentMethodId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaymentMethod", x => x.PaymentMethodId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Province",
                 columns: table => new
                 {
@@ -71,6 +31,20 @@ namespace Repositories.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Province", x => x.ProvinceId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,7 +63,7 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -107,38 +81,11 @@ namespace Repositories.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    AppUserRoleId = table.Column<int>(nullable: false)
+                    FullName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AppUserRole_AppUserRoleId",
-                        column: x => x.AppUserRoleId,
-                        principalTable: "AppUserRole",
-                        principalColumn: "AppUserRoleId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,7 +115,28 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "RoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleClaims_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -179,17 +147,17 @@ namespace Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_UserClaims_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
+                name: "UserLogins",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
@@ -199,17 +167,17 @@ namespace Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_UserLogins_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
+                name: "UserRoles",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -217,23 +185,23 @@ namespace Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        name: "FK_UserRoles_Role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_UserRoles_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
+                name: "UserTokens",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -243,51 +211,13 @@ namespace Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_UserTokens_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bill",
-                columns: table => new
-                {
-                    BillId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<string>(nullable: false),
-                    HouseId = table.Column<int>(nullable: false),
-                    StartDate = table.Column<DateTimeOffset>(nullable: false),
-                    Months = table.Column<int>(nullable: false),
-                    EndDate = table.Column<DateTimeOffset>(nullable: false),
-                    SubTotal = table.Column<double>(nullable: false),
-                    Iva = table.Column<double>(nullable: false),
-                    Total = table.Column<double>(nullable: false),
-                    PaymentMethodId = table.Column<int>(nullable: false),
-                    Id = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bill", x => x.BillId);
-                    table.ForeignKey(
-                        name: "FK_Bill_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Bill_House_HouseId",
-                        column: x => x.HouseId,
-                        principalTable: "House",
-                        principalColumn: "HouseId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Bill_PaymentMethod_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethod",
-                        principalColumn: "PaymentMethodId");
                 });
 
             migrationBuilder.CreateTable(
@@ -335,25 +265,60 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BillService",
+                name: "Invoice",
                 columns: table => new
                 {
-                    BillId = table.Column<int>(nullable: false),
+                    InvoiceId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(nullable: false),
+                    Date = table.Column<DateTimeOffset>(nullable: false),
+                    HouseId = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTimeOffset>(nullable: false),
+                    Months = table.Column<int>(nullable: false),
+                    EndDate = table.Column<DateTimeOffset>(nullable: false),
+                    HomeSubTotal = table.Column<double>(nullable: false),
+                    ServicesSubTotal = table.Column<double>(nullable: false),
+                    SubTotal = table.Column<double>(nullable: false),
+                    Tax = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    Id = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoice", x => x.InvoiceId);
+                    table.ForeignKey(
+                        name: "FK_Invoice_User_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Invoice_House_HouseId",
+                        column: x => x.HouseId,
+                        principalTable: "House",
+                        principalColumn: "HouseId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InvoiceService",
+                columns: table => new
+                {
+                    InvoiceId = table.Column<int>(nullable: false),
                     ServiceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BillService", x => new { x.BillId, x.ServiceId });
+                    table.PrimaryKey("PK_InvoiceService", x => new { x.InvoiceId, x.ServiceId });
                     table.ForeignKey(
-                        name: "FK_BillService_Service_BillId",
-                        column: x => x.BillId,
+                        name: "FK_InvoiceService_Invoice_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoice",
+                        principalColumn: "InvoiceId");
+                    table.ForeignKey(
+                        name: "FK_InvoiceService_Service_ServiceId",
+                        column: x => x.ServiceId,
                         principalTable: "Service",
                         principalColumn: "ServiceId");
-                    table.ForeignKey(
-                        name: "FK_BillService_Bill_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Bill",
-                        principalColumn: "BillId");
                 });
 
             migrationBuilder.InsertData(
@@ -388,11 +353,11 @@ namespace Repositories.Migrations
                 columns: new[] { "ServiceId", "Description", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 4, "lorem ipsum", "House Insurance", 30.0 },
-                    { 1, "lorem ipsum", "Surveillance 24/7", 30.0 },
-                    { 2, "lorem ipsum", "Swimming Pool Maintenance", 13.0 },
-                    { 3, "lorem ipsum", "Garden..", 25.0 },
-                    { 5, "lorem ipsum", "Solar Panels", 9.0 }
+                    { 4, "lorem ipsum", "House Insurance", 60.0 },
+                    { 1, "lorem ipsum", "Surveillance 24/7", 60.0 },
+                    { 2, "lorem ipsum", "Swimming Pool Maintenance", 26.0 },
+                    { 3, "lorem ipsum", "Garden", 50.0 },
+                    { 5, "lorem ipsum", "Solar Panels", 18.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -400,13 +365,13 @@ namespace Repositories.Migrations
                 columns: new[] { "HouseId", "Bathrooms", "Bedrooms", "Description", "ImageName", "IsItAvailable", "Name", "Price", "ProvinceId", "Size" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House1.jpeg", true, "House #1", 100000.0, 1, 100.0 },
-                    { 2, 2, 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House2.jpeg", true, "House #2", 125000.0, 2, 300.0 },
-                    { 3, 1, 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House3.jpeg", true, "House #3", 155000.0, 3, 180.0 },
-                    { 4, 2, 4, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House4.jpeg", true, "House #4", 250000.0, 4, 225.0 },
-                    { 5, 3, 3, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House5.jpeg", true, "House #5", 330000.0, 5, 500.0 },
-                    { 6, 3, 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House6.jpeg", true, "House #6", 2100000.0, 6, 190.0 },
-                    { 7, 2, 4, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "House7.jpeg", true, "House #7", 300000.0, 7, 260.0 }
+                    { 1, 1, 1, "Sex reached suppose our whether. Oh really by an manner sister so. One sportsman tolerably him extensive put she immediate. He abroad of cannot looked in. Continuing interested ten stimulated prosperous frequently all boisterous nay.", "House1.jpeg", true, "House #1", 200.0, 1, 100.0 },
+                    { 2, 2, 2, "Extremity direction existence as dashwoods do up. Securing marianne led welcomed offended but offering six raptures. Conveying concluded newspaper rapturous oh at. Two indeed suffer saw beyond far former mrs remain.", "House2.jpeg", true, "House #2", 250.0, 2, 300.0 },
+                    { 3, 1, 2, "And produce say the ten moments parties. Simple innate summer fat appear basket his desire joy. Outward clothes promise at gravity do excited. Sufficient particular impossible by reasonable oh expression is. ", "House3.jpeg", true, "House #3", 300.0, 3, 180.0 },
+                    { 4, 2, 4, "His followed carriage proposal entrance directly had elegance. Greater for cottage gay parties natural. Remaining he furniture on he discourse suspected perpetual. Power dried her taken place day ought the. Four and our ham west miss. ", "House4.jpeg", true, "House #4", 500.0, 4, 225.0 },
+                    { 5, 3, 3, "Affronting everything discretion men now own did. Still round match we to. Frankness pronounce daughters remainder extensive has but. Happiness cordially one determine concluded fat. Plenty season beyond by hardly giving of. ", "House5.jpeg", true, "House #5", 660.0, 5, 500.0 },
+                    { 6, 3, 2, " Four and our ham west miss. Education shameless who middleton agreement how. We in found world chief is at means weeks smile. ", "House6.jpeg", true, "House #6", 420.0, 6, 190.0 },
+                    { 7, 2, 4, "Discovered her his pianoforte insipidity entreaties. Began he at terms meant as fancy. Breakfast arranging he if furniture we described on. Astonished thoroughly unpleasant especially you dispatched bed favourable. ", "House7.jpeg", true, "House #7", 600.0, 7, 260.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -475,70 +440,6 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AppUserRoleId",
-                table: "AspNetUsers",
-                column: "AppUserRoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bill_CustomerId",
-                table: "Bill",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bill_HouseId",
-                table: "Bill",
-                column: "HouseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bill_PaymentMethodId",
-                table: "Bill",
-                column: "PaymentMethodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BillService_ServiceId",
-                table: "BillService",
-                column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_House_ProvinceId",
                 table: "House",
                 column: "ProvinceId");
@@ -552,28 +453,64 @@ namespace Repositories.Migrations
                 name: "IX_HouseService_ServiceId",
                 table: "HouseService",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoice_CustomerId",
+                table: "Invoice",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoice_HouseId",
+                table: "Invoice",
+                column: "HouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InvoiceService_ServiceId",
+                table: "InvoiceService",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "Role",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId",
+                table: "RoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "User",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "User",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaims_UserId",
+                table: "UserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId",
+                table: "UserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "BillService");
-
             migrationBuilder.DropTable(
                 name: "HouseFeature");
 
@@ -581,28 +518,40 @@ namespace Repositories.Migrations
                 name: "HouseService");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "InvoiceService");
 
             migrationBuilder.DropTable(
-                name: "Bill");
+                name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserLogins");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "UserTokens");
 
             migrationBuilder.DropTable(
                 name: "Feature");
 
             migrationBuilder.DropTable(
+                name: "Invoice");
+
+            migrationBuilder.DropTable(
                 name: "Service");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "House");
-
-            migrationBuilder.DropTable(
-                name: "PaymentMethod");
-
-            migrationBuilder.DropTable(
-                name: "AppUserRole");
 
             migrationBuilder.DropTable(
                 name: "Province");
