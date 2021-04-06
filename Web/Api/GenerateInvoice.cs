@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Services.Generic;
 using Web.Models;
 
@@ -12,34 +13,33 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InvoiceController : ControllerBase
+    public class GenerateInvoiceController : ControllerBase
     {
-        private readonly GenericService<House> houseService;
-        private readonly GenericService<Service> serviceServiceX;
+        private readonly IHouseService houseService;
+        private readonly IGenericService<Service> serviceServiceX;
 
-        public InvoiceController(GenericService<House> houseService, GenericService<Service> serviceServiceX)
+        public GenerateInvoiceController(IHouseService houseService, IGenericService<Service> serviceServiceX)
         {
             this.houseService = houseService;
             this.serviceServiceX = serviceServiceX;
         }
 
 
-        [HttpGet("{id}")]
-        public ActionResult<InvoiceDto> GetInvoiceDto(int houseId, string date, int monthsToStay, IEnumerable<int> servicesId)
+        [HttpGet("")]
+        public ActionResult<InvoiceDto> GenerateInvoiceDto([FromQuery] int houseId, [FromQuery] int monthsToStay, [FromQuery] IEnumerable<int> service)
         {
             // TODO: Your code here
             var house = houseService.GetById(houseId);
-            // if (house == null)
-            // {
-            //     return NotFound();
-            // }
-            var services = servicesId.Select(id => serviceServiceX.GetById(id));
+            if (house == null)
+            {
+                return NotFound();
+            }
+            var services = service.Select(id => serviceServiceX.GetById(id)).ToList();
             // var fromDate = DateTime.ParseExact(date, "MM.dd.yyyy", new CultureInfo("en-US"));
             var response = new InvoiceDto()
             {
                 HouseId = house.HouseId,
                 HousePrice = house.Price,
-                From = date,
                 MonthsToStay = monthsToStay,
                 SelectedServices = services
             };

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using Web.Dto;
+using Web.Models;
 //using Web.Models;
 
 namespace Web.Api
@@ -25,9 +25,19 @@ namespace Web.Api
         [HttpGet("")]
         public ActionResult<IEnumerable<HouseDto>> GetHouses()
         {
-            // TODO: Your code here
             var houseEntities = _houseService.GetAll();
             var response = _mapper.Map<IEnumerable<HouseDto>>(houseEntities);
+            return Ok(response);
+        }
+        [HttpGet("{id}")]
+        public ActionResult<HouseDto> GetHouse(int id)
+        {
+            var house = _houseService.GetById(id);
+            if (house == null)
+            {
+                return NotFound();
+            }
+            var response = _mapper.Map<HouseDto>(house);
             return Ok(response);
         }
 

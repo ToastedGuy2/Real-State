@@ -24,7 +24,7 @@ namespace Services.Generic
             return _genericRepository.GetById(id);
         }
 
-        public void Insert(T obj)
+        public virtual void Insert(T obj)
         {
             _genericRepository.Insert(obj);
         }

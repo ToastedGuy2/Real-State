@@ -82,11 +82,16 @@ namespace Web
 
             services.AddScoped<IGenericRepository<Feature>, GenericRepository<Feature>>();
             services.AddScoped<IGenericService<Feature>, GenericService<Feature>>();
-            // // services.AddScoped<IGenericRepository<Item>, ItemRepository>();
             services.AddScoped<IFileService, FileService>();
 
             services.AddScoped<IGenericRepository<Service>, GenericRepository<Service>>();
             services.AddScoped<IGenericService<Service>, GenericService<Service>>();
+
+            services.AddScoped<IGenericRepository<Invoice>, InvoiceRepository>();
+            services.AddScoped<IInvoiceService, InvoiceServiceX>();
+
+            services.AddScoped<IGenericRepository<InvoiceService>, GenericRepository<InvoiceService>>();
+            services.AddScoped<IGenericService<InvoiceService>, GenericService<InvoiceService>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,7 +121,7 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     // pattern: "{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{controller=Rent}/{action=List}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllers();
             });
         }

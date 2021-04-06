@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-    [Table("BillService")]
-    public class BillService
+    [Table("InvoiceService")]
+    public class InvoiceService
     {
         [Key]
-        public int BillId { get; set; }
-        [ForeignKey("BillId")]
-        public Bill Bill { get; set; }
+        public int InvoiceId { get; set; }
+        [ForeignKey("InvoiceId")]
+        public Invoice Invoice { get; set; }
         [Key]
         public int ServiceId { get; set; }
         [ForeignKey("ServiceId")]

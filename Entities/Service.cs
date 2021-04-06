@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Entities
 {
@@ -15,7 +16,9 @@ namespace Entities
         public double Price { get; set; }
         [Required]
         public string Description { get; set; }
-        public ICollection<BillService> Bills { get; set; } = new List<BillService>();
+        [JsonIgnore]
+        public ICollection<InvoiceService> Invoices { get; set; } = new List<InvoiceService>();
+        [JsonIgnore]
         public ICollection<HouseService> Houses { get; set; } = new List<HouseService>();
     }
 }

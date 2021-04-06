@@ -38,7 +38,7 @@ namespace Web.Controllers
         // GET: House
         public IActionResult List()
         {
-            return View(_houseService.GetAll());
+            return View(_houseService.GetByAvailability());
         }
 
         // GET: House/Create
@@ -58,7 +58,7 @@ namespace Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("HouseId,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] AddHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
+        public IActionResult Create(AddHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (ModelState.IsValid)
             {

@@ -29,6 +29,8 @@ namespace Web.ViewModels.House
                     ErrorMessage = "Your image's filetype is not valid.")]
         public virtual IFormFile ImageUploaded { get; set; }
         [Required]
+        [MinLength(50)]
+        [MaxLength(255)]
         public string Description { get; set; }
         public IEnumerable<Feature> Features { get; set; } = new List<Feature>();
         public IEnumerable<HouseFeature> SelectedFeatures { get; set; } = new List<HouseFeature>();

@@ -54,9 +54,15 @@ namespace Repositories
             return _context.Houses.
             Include(h => h.Province).
             Include(h => h.Services).
+            ThenInclude(s => s.Service).
             Include(h => h.Features).
             ThenInclude(hF => hF.Feature).
             OrderBy(h => h.Name);
+        }
+
+        public IEnumerable<House> GetByAvailability(bool availability = true)
+        {
+            return GetAllEagerLoading().Where(h => h.IsItAvailable == availability).ToList();
         }
     }
 }

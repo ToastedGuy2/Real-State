@@ -5,16 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-    [Table("Bill")]
-    public class Bill
+    [Table("Invoice")]
+    public class Invoice
     {
         [Key]
-        public int BillId { get; set; }
+        public int InvoiceId { get; set; }
         [Required]
-        [ForeignKey("Id")]
         public string CustomerId { get; set; }
         [ForeignKey("Id")]
         public AppUser Customer { get; set; }
+        [Required]
+        public DateTimeOffset Date { get; set; }
         [Required]
         public int HouseId { get; set; }
         [ForeignKey("HouseId")]
@@ -25,17 +26,16 @@ namespace Entities
         public int Months { get; set; }
         [Required]
         public DateTimeOffset EndDate { get; set; }
+        public ICollection<InvoiceService> Services { get; set; } = new List<InvoiceService>();
+        [Required]
+        public double HomeSubTotal { get; set; }
+        [Required]
+        public double ServicesSubTotal { get; set; }
         [Required]
         public double SubTotal { get; set; }
         [Required]
-        public ICollection<BillService> Services { get; set; } = new List<BillService>();
-        [Required]
-        public double Iva { get; set; }
+        public double Tax { get; set; }
         [Required]
         public double Total { get; set; }
-        [Required]
-        public int PaymentMethodId { get; set; }
-        [ForeignKey("PaymentMethodId")]
-        public PaymentMethod PaymentMethod { get; set; }
     }
 }
