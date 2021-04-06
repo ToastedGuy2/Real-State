@@ -53,5 +53,10 @@ namespace Services
         {
             return _houseRepository.HouseExists(houseId);
         }
+
+        public IEnumerable<House> GetByAvailability(bool availability = true)
+        {
+            return _houseRepository.GetByAvailability(availability);
+        }
     }
 }

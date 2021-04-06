@@ -1,167 +1,157 @@
 @using Web.Helpers
 @{
     ViewData["Title"] = "House";
+    Layout = "_RentHouseLayout";
     var today = DateTime.Now.ToString("yyyy/MM/dd");
     var next10days = DateTime.Now.AddDays(10).ToString("yyyy/MM/dd");
 }
 @section CSS{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_red.css">
-    @* <link rel="stylesheet" href="style.css"> *@
+    <link rel="stylesheet" href="~/css/renthouse.css">
 }
 
-@model RentHouseViewModel
-<div class="container-fluid my-3">
-    <div class="row">
-        @* House's description *@
-        <div class="col-lg-5 ">
-            <img src="~/images/Houses/@Model.House.ImageName" class="img-fluid">
-        </div>
-        <div class="col-lg-4 mx-md-5 ">
-            <h1 class="text-center">@Model.House.Name</h1>
-            <p><span class="fw-bold text-muted">Price:</span><span
-                    class="badge bg-primary">@Model.House.Price.ToCurrency()/month</span>
-            </p>
-            <p class="">@Model.House.Description</p>
-            <ul>
-                <li>
-                    <p><span class="fw-bold">Location: </span>@Model.House.Province.Name </p>
-                </li>
-                <li>
-                    <p><span class="fw-bold">Size:</span> @Model.House.Size m2</p>
-                </li>
-                <li>
-                    <p><span class="fw-bold">Bedrooms: </span>@Model.House.Bedrooms</p>
-                </li>
-                <li>
-                    <p><span class="fw-bold">Bathrooms:</span> @Model.House.Bathrooms</p>
-                </li>
-            </ul>
-        </div>
-        @* FORM *@
-        <div class="col-lg-2 border rounded border-2 py-3">
-            <form action="post">
-                <input type="hidden" asp-for="House.HouseId">
-                <h5 class="text-center fw-bold">Rent Details</h5>
-                    <div class="mb-3">
-                        <label asp-for="From" class="form-label"></label><span class="text-danger">*</span>
-                        <input asp-for="From" class="form-control">
-                        @* <span asp-validation-for="From" class="text-danger"></span> *@
-                    </div>
-                
-                <div class="mb-3">
-                    <label asp-for="Months" class="form-label"></label><span class="text-danger">*</span>
-                    <input asp-for="Months" class="form-control" min="1" placeholder="1">
-                    <span asp-validation-for="Months" class="text-danger"></span>
+@model InvoiceViewModel
+<div class="container my-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="bs-stepper">
+          <div class="bs-stepper-header" role="tablist">
+            <!-- your steps here -->
+            <div class="step" data-target="#logins-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Rent Details</span>
+              </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#information-part">
+              <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Credit Card Information</span>
+              </button>
+            </div>
+          </div>
+  <div class="bs-stepper-content">
+    <!-- your steps content here -->
+    <div id="logins-part" class="content fade" role="tabpanel" aria-labelledby="logins-part-trigger">
+    <form method="post" asp-controller="Rent" asp-action="House" id="rent-form">
+        <div class="row">
+          <div class="col-7">
+            <input type="hidden" asp-for="HouseId">
+            <input type="hidden" asp-for="Price">
+            <h5 class="text-center fw-bold">Rent Details</h5>
+            @* <div class="form-outline">
+              <i class="far fa-calendar-alt trailing"></i>
+              <input asp-for="From" class="form-control form-icon-trailing" />
+              <label asp-for="From" class="form-label" ></label>
+          </div> *@
+            <div class="mt-4">
+              <label asp-for="From" class="form-label"></label>
+              <input asp-for="From" class="form-control">
+            </div>
+            <span class="text-danger" asp-validation-for="From"></span>
+            <div class="form-outline mt-4">
+              <input asp-for="Months" class="form-control" min="1">
+              <label asp-for="Months" class="form-label"></label>
+            </div>
+            <span class="text-danger" asp-validation-for="Months"></span>
+            <div class="form-outline mt-4">
+              <input asp-for="To" class="form-control" readonly>
+              <label asp-for="To" class="form-label"></label>
+            </div>
+            <span class="text-danger" asp-validation-for="To"></span>
+            <hr>
+            <h5 class="text-center fw-bold my-4">Services</h5>
+            @foreach (var service in Model.ServicesToDisplay)
+            {
+                <div class="form-check">
+                    <input type="checkbox" name="service" value="@service.ServiceId" class="form-check-input" >
+                    <label class="form-check-label" >
+                        @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
+                    </label>
                 </div>
-                <div class="mb-3">
-                        <label asp-for="To" class="form-label"></label>
-                        <input asp-for="To" class="form-control" disabled>
-                </div>
-                <div class="border border-bottom my-3"></div>
-                @* <hr> *@
-                <h5 class="text-center fw-bold">Services</h5>
-                @foreach (var service in Model.ServicesToDisplay)
-                {
-                    <div class="form-check">
-                        <input type="checkbox" name="services" value="@service.ServiceId" class="form-check-input" >
-                        <label class="form-check-label" > 
-                            @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
-                        </label>
-                    </div>
-                }
-
-                <div class="border border-bottom my-3"></div>
+            }
+            <hr>
+            <div class="text-end"><button type="button" class="btn btn-primary" id="next-btn"><i class="fas fa-arrow-right"></i> Next</button></div>
+          </div>
+          <div class="col-5 py-3" id="rent-costs">
                 <h5 class="text-center fw-bold">Costs</h5>
-                <p><span class="fw-bold">Subtotal:</span> <span id="subTotal">@Model.SubTotal.ToCurrency()</span></p>
-                <p><span class="fw-bold">Iva:</span> <span id="iva">@Model.Iva.ToCurrency()</span></p>
-                <p><span class="fw-bold">Total:</span> <span id="total">@Model.Total.ToCurrency()</span></p>
-                <div class="border border-bottom my-3"></div>
-
-                <button type="button" class="btn w-100 btn-success">Continue</button>
-            </form>
-    
+                <p><span>Home:</span> <span class="lead fw-bold" id="homeSubTotal">@Model.HomeSubTotal.ToCurrency()</span></p>
+                <p><span>Services:</span> <span class="lead fw-bold" id="serviceSubTotal">@Model.ServicesSubTotal.ToCurrency()</span></p>
+                <p><span>Subtotal:</span> <span class="lead fw-bold" id="subTotal">@Model.SubTotal.ToCurrency()</span></p>
+                <p><span>Tax:</span> <span class="lead fw-bold" id="tax">@Model.Tax.ToCurrency()</span></p>
+                <h2 class="fw-bold">Total:</h2>
+                <h1 class="fw-bold" id="total">@Model.Total.ToCurrency()</h1>
+          </div>
         </div>
+            </form>
     </div>
-</div>
-@* MODAL *@
-<div class="modal fade" tabindex="-1" id="bill">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title ME-highlighted-text">RentME</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <h3 class="primary-color">Invoice</h3>
-              <h5 class="fw-bold secondary-color d-flex justify-content-between">
-                  <div>Due to</div>   <div>03.13.2021</div> 
-              </h5>
-                <h5 class="d-flex justify-content-between">
-                  <div>House's name</div>   <div>House #7</div> 
-              </h5>
-                <h5 class="d-flex justify-content-between">
-                  <div>Price</div>   <div>$300,000.00</div> 
-              </h5>
-                              <h5 class="d-flex justify-content-between">
-                  <div>Months</div>   <div>1</div> 
-              </h5>
-                <h5 class="d-flex justify-content-between">
-                  <div>Date</div>   <div>03.13.2021 - 04.13.2021</div> 
-              </h5>                    
-              <div id="rent-cost">
-              <h4 class="fw-bold secondary-color d-flex justify-content-between ">
-                  <div>Rent</div>   <div>$600000.00</div> 
-              </h4>
-              @* <div class="d-flex justify-content-between">
-                  <p>House Price * Months</p>
-                  <p>$600000.00</p>
-              </div> *@
-          </div> 
-            <div id="service-cost">
-              <h4 class="fw-bold secondary-color d-flex justify-content-between">
-                  <div>Services</div>   <div>$73,000.00</div> 
-              </h4>
-              <div class="d-flex justify-content-between">
-                  <p>Surveillance 24/7</p>
-                  <p>$30,000.00</p>
-              </div>
+    <div id="information-part" class="content fade" role="tabpanel" aria-labelledby="information-part-trigger">
+                  <!-- Credit Card Picture -->
+            <div class="card-wrapper"></div>
+            <!-- Form -->
+            <form action="#" method="POST" id="credit-card-form">
+
+                <div class="form-outline mt-4">
+                    <i class="far fa-credit-card trailing"></i>
+                    <input class="form-control form-icon-trailing" id="number"/>
+                    <label class="form-label">Card number</label>
+                </div>
+                <div class="form-outline mt-4">
+                    <input type="text" id="name" class="form-control" id="name"/>
+                    <label class="form-label" for="name">Name on Card</label>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                <div class="form-outline mt-4">
+                    <input type="text" id="expiry" class="form-control" placeholder="mm/yy"/>
+                    <label class="form-label" for="name">Expiry Date</label>
+                </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-outline mt-4">
+                        <i class="fas fa-info trailing"></i>
+                        <input id="cvc" class="form-control form-icon-trailing" />
+                        <label class="form-label">Security Code</label>
+                    </div>
+                  </div>
+                </div>
+            @* <div class="form-outline mt-4">
+                    <input type="text" id="number" class="form-control" />
+                    <label class="form-label" for="number">Card number</label>
+                </div> 
+                <div class="form-outline mt-4">
+                    <input type="text" id="name" class="form-control" />
+                    <label class="form-label" for="name">Name on Card</label>
+                </div>
+                <div class="form-outline mt-4">
+                    <input type="text" id="expiry" class="form-control" />
+                    <label class="form-label" for="expiry">Expiry Date</label>
+                </div>
+                <div class="form-outline mt-4">
+                    <input type="text" id="cvc" class="form-control" />
+                    <label class="form-label" for="cvc">Security Code</label>
+                </div> *@
                 <div class="d-flex justify-content-between">
-                  <p>Swimming Pool Maintenance</p>
-                  <p>$13,000.00</p>
-              </div>
-             <div class="d-flex justify-content-between">
-                  <p>House Insurance</p>
-                  <p>$30,000.00</p>
-              </div>
-          </div> 
-             <div id="subTotal-cost">
-              <h5 class="fw-bold secondary-color d-flex justify-content-between">
-                  <div>Sub Total</div>   <div>$373000.00</div> 
-              </h5>             
-            </div>
-            <div id="tax-cost">
-              <h5 class="fw-bold secondary-color d-flex justify-content-between">
-                  <div>Tax</div>   <div>$48490.00</div> 
-              </h5>             
-            </div>
-            <div id="total-cost">
-              <h3 class="fw-bold secondary-color primary-color d-flex justify-content-between">
-                  <div>Total</div>   <div>$421490.00 </div> 
-              </h3>             
-            </div>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-lg btn-success">Pay Now</button>
-      </div>
+                  <button type="button" class="mt-4 btn btn-primary" id="previous-btn"><i class="fas fa-arrow-left"></i> Previous</button>
+                  <button type="button" class="mt-4 btn btn-success" id="confirmation-btn"><i class="fas fa-check-circle"></i> Confirm Payment</button>
+                </div>
+            </form>
+        </div>
     </div>
   </div>
 </div>
+
+    </div>
+</div>
     @section Scripts{
-    <partial name="_ValidationScriptsPartial"/>
-    <script src="~/lib/node_modules/axios/dist/axios.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0/build/global/luxon.min.js"></script>
     <script src="https://unpkg.com/currency.js@2.0.3/dist/currency.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
+    <script src="~/lib/node_modules/card/dist/card.js"></script>
     <script src="~/js/Rent/RentHouse.js"></script>
 }

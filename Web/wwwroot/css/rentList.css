@@ -22,7 +22,19 @@
     .card-img-top {
         height: 16vw;
     }
-}
+    .card{
+        border: 2px solid #fff;
+    }
+    .card:hover{
+        cursor: pointer;
+        border: 2px solid #961047;
+        background-color: #eee;
+    }
+    .card-active{
+        cursor: pointer;
+        border: 2px solid #961047;
+        background-color: #eee;
+    }}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -38,32 +50,14 @@
     }
 }
 
-#rent-houses-container {
-    border-color: #961047 !important;
+.card-active{
+    border: 2px solid #961047;
+    background-color: #eee;
 }
-
-.card-lists-hidden {
-    display: none;
+#home-picture{
+    max-height: 400px;
 }
-
-.card-lists-onscreen {
-    display: flex;
-}
-
-.see-details-btn {
-    border-color: #14445c;
-    color: #14445c;
-}
-
-.see-details-btn:hover,
-.see-details-btn:active {
-    background-color: #14445c;
-    color: #fcf4ec;
-    border-color: #14445c;
-}
-
-.see-details-btn:focus {
-    box-shadow: 0 0 0 0.25rem rgb(20 68 92 / 50%);
-    background-color: #14445c;
-    color: #fcf4ec
+#home-details,#home-details-example{
+    border: 3px solid #961047;
+    border-radius: 0.25rem;
 }

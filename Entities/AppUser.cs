@@ -11,6 +11,6 @@ namespace Entities
         [Required]
         public string FullName { get; set; }
 
-        public ICollection<Bill> Bills { get; set; } = new List<Bill>();
+        public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

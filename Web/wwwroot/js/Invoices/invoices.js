@@ -1,0 +1,1 @@
+const dataTable = new simpleDatatables.DataTable("#invoices-table");

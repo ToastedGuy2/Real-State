@@ -1,7 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using Entities;
-using Web.Dto;
+using Web.Models;
 using Web.ViewModels.House;
 
 namespace Web.Profiles

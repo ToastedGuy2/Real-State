@@ -1,0 +1,12 @@
+body{
+    background-color: #eee;
+    height: 100vh;
+}
+.bs-stepper{
+    max-width: 576px;
+}
+#rent-costs{
+    background-color: #961047;
+    color: #fff;
+    border-radius: 0.25rem;
+}

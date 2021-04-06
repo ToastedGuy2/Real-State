@@ -7,76 +7,116 @@
     <link rel="stylesheet" href="~/css/rentList.css">
     <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
 }
-<div class="container-fluid my-3">
-    <div class="row">
-        @* <div class="col-lg-2 col-md-2 col-sm-5 d-none-sm"> *@
-        <div class=" d-none d-md-block col-lg-2">
-            <div id="filter-list">
-                <div id="feature-list">
-                    <h3>Features</h3>
-                    @foreach (var feature in @Model.Features)
-                    {
-                        <div class="feature-item">
-                            <div class="form-check ms-2">
-                                <input type="checkbox" class="form-check-input" value="@feature.Name" />
-                                <label class="form-check-label" for="flexCheckDefault"> @feature.Name </label>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div id="province-list" class="mt-3">
-                    <h3>Provinces</h3>
-                    @foreach (var province in @Model.Provinces)
-                    {
-                        if(province.Name != Model.ProvinceToCheck){
-                        <div class="province-item">
-                            <div class="form-check ms-2">
-                                <input type="checkbox" class="form-check-input" value="@province.Name" />
-                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
-                            </div>
-                        </div>
-                        }
-                        else{
-                            <div class="province-item">
-                                <input type="checkbox" class="form-check-input me-2" value="@province.Name" name="province" checked>
-                                    @province.Name
-                            </div>
-                        }
-
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="col" id="rent-houses-container">
-                <div class="row" id="houseCards">
-                        @foreach (var house in @Model.Houses)
-                        {
-                            <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
-                                    <div class="card">
-                                        <img src="~/images/Houses/@house.ImageName" class="card-img-top">
-                                        <div class="card-body">
-                                            <h2 class="card-title secondary-color mb-2">@house.Price.ToCurrency()</h2>
-                                            <p class="card-subtitle mb-2 d-flex"><span class="me-1 me-md-2"><i class="fas fa-bed"></i> @house.Bedrooms Bd</span> <span>
-                                                <i class="fas fa-toilet-paper"></i>
-                                                    @house.Bathrooms Ba
-                                            </span>
-                                            </p>
-                                            <p class="card-text"> <span><i class="fas fa-search-location"></i> @house.Province.Name</span> </p>
-                                            <p class="card-text"> <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-outline-primary btn-sm w-100 see-details-btn"><i
-                                                    class="fas fa-eye"></i> See more
-                                                details</a></p>
-
+<div class="container-fluid">
+    <div class="row my-3">
+            <div id="filter-list" class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" id="features" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            Features
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="features">
+                            @foreach (var feature in @Model.Features)
+                            {
+                                <li>
+                                    <div class="feature-item dropdown-item">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" value="@feature.Name" name="feature" />
+                                            <label class="form-check-label" for="flexCheckDefault"> @feature.Name </label>
                                         </div>
                                     </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="dropdown mx-2">
+                        <button class="btn btn-secondary dropdown-toggle" id="provinces" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            Provinces
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="provinces">
+                            @foreach (var province in @Model.Provinces)
+                            {
+                                if(province.Name != Model.ProvinceToCheck){
+                                    <div class="province-item dropdown-item">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" value="@province.Name" name="province" />
+                                            <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
+                                        </div>
+                                    </div>
+                                }
+                                else{
+                                    <div class="province-item dropdown-item">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" value="@province.Name" name="province" checked/>
+                                            <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                        </ul>
+                    </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-8">
+            <div class="row" id="house-list">
+                @foreach (var house in @Model.Houses)
+                {
+                    <div class="col-sm-6 col-md-12 col-lg-6 col-xl-4 mb-3">
+                            <div class="card">
+                                <img src="~/images/Houses/@house.ImageName" class="card-img-top">
+                                <div class="card-body">
+                                    <input type="hidden" name="houseId" value="@house.HouseId">
+                                    <h2 class="card-title secondary-color mb-2">@house.Price.ToCurrency()</h2>
+                                    <p class="card-subtitle mb-2 d-flex">
+                                        <span><i class="fas fa-bed"></i> @house.Bedrooms Bd</span> 
+                                        <span class="mx-1 mx-md-2"><i class="fas fa-toilet-paper"></i> @house.Bathrooms Ba </span>
+                                        <span><i class="fas fa-ruler-combined"></i> @house.Size sqft</span>
+                                    </p>
+                                    <p class="card-text"> <span><i class="fas fa-search-location"></i> @house.Province.Name</span> </p>
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            <div>
+                                                <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-danger"><i
+                                                    class="fas fa-truck-moving"></i> Rent</a>
+                                                <a asp-controller="House" asp-action="Details" asp-route-id="@house.HouseId" class="btn btn-outline-info"><i
+                                                    class="fas fa-info-circle"></i> Info</a>
+                                            </div>
+                                        </div>
+                                </div>
                             </div>
-                        }
-                </div>
+                    </div>
+                }
+            </div>
         </div>
+            
+        <div class="d-none d-md-block col-md-6 col-lg-4 " id="home-details-container"> @* d-md-block *@
+            <div class="d-flex h-100 flex-column align-items-md-center justify-content-center" id="home-details-example">
+                <h1 class="display-1 primary-color"><i class="fas fa-home fa-3x"></i></h1>
+                <h2 class="text-black">Click a house to see it's details</h2>
+            </div>
+
+            <div id="home-details" class="d-none"> 
+                <img src="" alt="home's picture" id="home-picture" class="img-fluid">
+                    <div class="card-body">
+                        <h1 class="text-center" id="home-name">House</h1>
+                        <h1 class="primary-color bold" id="home-price">$23123.123</h1>
+                        <h3>Description</h3>
+                        <p id="home-description"></p>
+                        <p></p>
+                        <p><i class="fas fa-bed"></i> Bedrooms: <span id="home-bedrooms"></span></p>
+                        <p><i class="fas fa-toilet-paper"></i> Bathrooms: <span id="home-bathrooms"></span></p>
+                        <p><i class="fas fa-ruler-combined"></i> Size: <span id="home-size"></span></p>
+                        <p><i class="fas fa-search-location"></i> Province: <span id="home-province"></span></p>
+                    </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
 @section scripts{
     <script src="~/lib/notyf/notyf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/currency.js@2.0.3/dist/currency.min.js"></script>
     <script src="~/js/Rent/RentList.js"></script>
 }
