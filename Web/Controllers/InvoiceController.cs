@@ -28,7 +28,7 @@ namespace Web.Controllers
         {
             return View(_invoiceService.GetAll());
         }
-        [Authorize(Roles = "SuperAdmin,Customer")]
+        [Authorize(Roles = "Customer")]
         public IActionResult Customer()
         {
             string customerId = _userManager.GetUserId(User);

@@ -59,7 +59,7 @@ namespace Web
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.AccessDeniedPath = "/Show/NotAuthorize";
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Home/Index";
             });
@@ -103,7 +103,7 @@ namespace Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Show/Error");
                 // The default HSTS value is 30 days. You may want to change this for Itemion scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

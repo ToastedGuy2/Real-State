@@ -1,0 +1,10 @@
+body{
+    background-color: #eee;
+    color: black;
+}
+#bill{
+    background-color: white;
+    max-width: 525px;
+    border: 4px solid #961047;
+    border-radius: 10px;
+}

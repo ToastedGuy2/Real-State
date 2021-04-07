@@ -1,0 +1,13 @@
+body{
+    background-color: #eee;
+    color: black;
+}
+h1{
+    font-family: 'Dela Gothic One', cursive;
+}
+p{
+    font-family: 'Open Sans', sans-serif;
+}
+.row{
+    height: 100vh;
+}

@@ -27,6 +27,7 @@ namespace Repositories
         {
             return _context.Invoices.
             Include(i => i.Services).
+            ThenInclude(iV => iV.Service).
             Include(i => i.House).
             Include(i => i.Customer).
             OrderByDescending(i => i.Date);
