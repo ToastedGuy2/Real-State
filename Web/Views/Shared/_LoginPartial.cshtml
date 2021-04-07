@@ -14,6 +14,15 @@
         <li class="nav-item">
     <a class="nav-link" asp-controller="Service" asp-action="List" id="service-link">Services</a>
 </li>
+        <li class="nav-item">
+    <a class="nav-link" asp-controller="Invoice" asp-action="Admin" id="service-link">Invoices</a>
+</li>
+    }
+    else
+    {
+        <li class="nav-item">
+    <a class="nav-link" asp-controller="Invoice" asp-action="Customer" id="service-link">Invoices</a>
+</li>
     }
     <li class="nav-item">
     <a class="nav-link" asp-controller="Account" asp-action="Login"><i class="fas fa-user"></i></a>

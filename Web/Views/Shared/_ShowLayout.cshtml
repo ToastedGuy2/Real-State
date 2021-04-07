@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> RentME - @ViewData["Title"]</title>
+    @* Icon *@
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    @* Google Fonts *@
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    @* Google Fonts *@
+    @* Custom Google Fonts *@
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    @* MDB - CCS *@
+    <link rel="stylesheet" href="~/lib/mdb/css/mdb.min.css">
+    @* Font-Awesome *@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    @* Common CSS *@
+    <link rel="stylesheet" href="~/css/show_share.css">
+    @* Custom CSS *@
+    @RenderSection("CSS", required: false)
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center text-center">
+            @RenderBody()
+        </div>
+    </div>
+    @* Common Scripts *@
+    @* ** MDB *@
+    <script src="~/lib/mdb/js/mdb.min.js"></script>
+    @* Custom Scripts *@
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

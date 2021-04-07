@@ -2,3 +2,87 @@
     ViewData["Title"] = "Details";
 }
 @model Invoice
+@section CSS{
+    <link rel="stylesheet" href="~/css/invoice-details.css">
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div id="bill" class="shadow-2-strong py-3 px-4 my-5">
+            <div id="invoice-header" class="d-flex justify-content-between">
+                <h3 class="bold primary-color">Invoice</h3>
+                <div class="text-end">
+                    <h3 class="bold secondary-color">@Model.Customer.FullName</h3>
+                    <small class="text-muted">@Model.Date.ToString("dddd, dd MMMM yyyy HH:mm tt")</small>
+                </div>
+            </div>
+            <div id="invoice-body">
+                    <div>
+                        <p class="bold secondary-color mb-0">Months to Stay</p>
+                        <p>@Model.Months months</p>
+                    </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="bold secondary-color mb-0">From</p>
+                        <p>@Model.StartDate.ToString("dddd, dd MMMM yyyy") </p>
+                    </div>
+                    <div>
+                        <p class="bold secondary-color mb-0">To</p>
+                        <p>@Model.EndDate.ToString("dddd, dd MMMM yyyy") </p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-center">
+                        <p class="bold secondary-color mb-0">House's name</p>
+                        <p>@Model.House.Name</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="bold secondary-color mb-0">Price</p>
+                        <p>@Model.House.Price.ToCurrency()</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="bold secondary-color mb-0">Months to Stay</p>
+                        <p>@Model.Months </p>
+                    </div>
+                    <div class="text-center">
+                        <p class="bold secondary-color mb-0">SubTotal</p>
+                        <p>@Model.HomeSubTotal.ToCurrency()</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="bold secondary-color">Service</h4>
+                        @foreach (var invoiceService in @Model.Services)
+                        {
+                            <p>@invoiceService.Service.Name </p>
+                        }
+                    </div>
+                    <div>
+                        <h4 class="bold secondary-color">Price</h4>
+                        @foreach (var invoiceService in @Model.Services)
+                        {
+                            <p>@invoiceService.Service.Price.ToCurrency()</p>
+                        }
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="bold">Service's Sub Total:</p>
+                    <p class="bold">@Model.ServicesSubTotal.ToCurrency()</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="bold">Sub Total:</h4>
+                    <h4 class="bold">@Model.SubTotal.ToCurrency()</h4>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="bold">Tax:</h4>
+                    <h4 class="bold">@Model.Tax.ToCurrency()</h4>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="bold primary-color">Total:</h1>
+                    <h1 class="bold primary-color">@Model.Total.ToCurrency()</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
