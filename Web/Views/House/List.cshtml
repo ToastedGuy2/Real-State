@@ -5,12 +5,13 @@
 }
 @section CSS{
     <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
 }
 
 <div class="container">
     <div class="row">
         <h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-home"></i></span> <span class="secondary-color">Houses</span></h1>
-        <table class="table table-responsive">
+        <table class="table table-responsive" id="table">
             <thead>
                 <tr>
                     <th>
@@ -52,11 +53,15 @@
     </div>
 </div>
 @section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+<script src="~/js/Invoices/invoices.js"></script>
     <script src="~/lib/notyf/notyf.min.js"></script>
     <script src="~/js/house_list.js"></script>
 
-            @if(TempData["TransactionCompleted"]!=null){
-                <script src="~/js/House/showNotification.js"></script>
-                }
+    @if(TempData["TransactionCompleted"]!=null){
+        <script src="~/js/House/showNotification.js"></script>
+        }
 
+    <script src="~/js/smallContent.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     }

@@ -9,7 +9,7 @@
     <div class="row">
         <h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-file-invoice-dollar"></i></span> <span
                 class="secondary-color">Invoices</span></h1>
-<table class="table table-responsive" id="invoices-table">
+                <table class="table table-responsive" id="table">
                 <thead>
                     <tr>
                         <th>
@@ -80,6 +80,7 @@
 @section Scripts{
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
 <script src="~/js/Invoices/invoices.js"></script>
+    <script src="~/js/smallContent.js"></script>
 @{
     if(TempData["TransactionComplete"]!=null){
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

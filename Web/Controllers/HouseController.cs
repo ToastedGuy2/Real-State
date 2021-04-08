@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
-    [Authorize(Roles = "Admin,SuperAdmin")]
     public class HouseController : Controller
     {
         private readonly IHouseService _houseService;
@@ -36,12 +35,14 @@ namespace Web.Controllers
         }
 
         // GET: House
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult List()
         {
             return View(_houseService.GetByAvailability());
         }
 
         // GET: House/Create
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Create()
         {
             var model = new AddHouseViewModel()
@@ -58,6 +59,7 @@ namespace Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Create(AddHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (ModelState.IsValid)
@@ -88,6 +90,7 @@ namespace Web.Controllers
         }
 
         // GET: House/Edit/5
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -113,6 +116,7 @@ namespace Web.Controllers
         // // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Edit(int id, [Bind("HouseId,ImageName,Name,Price,Bedrooms,Bathrooms,Size,ProvinceId,ImageUploaded,Description")] UpdateHouseViewModel model, IEnumerable<int> features, IEnumerable<int> services)
         {
             if (id != model.HouseId)
