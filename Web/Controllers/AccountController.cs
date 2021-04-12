@@ -76,7 +76,7 @@ namespace Web.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Guid.NewGuid().ToString(), Email = model.Email, FullName = model.FullName, EmailConfirmed = true, PhoneNumberConfirmed = true };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FullName = model.FullName, EmailConfirmed = true, PhoneNumberConfirmed = true };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -84,7 +84,7 @@ namespace Web.Controllers
                     _logger.LogInformation("User created a new account with password.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

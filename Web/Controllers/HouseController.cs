@@ -38,7 +38,7 @@ namespace Web.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult List()
         {
-            return View(_houseService.GetByAvailability());
+            return View(_houseService.GetAll());
         }
 
         // GET: House/Create
@@ -65,6 +65,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 var house = _autoMapper.Map<House>(model);
+                house.IsItAvailable = true;
                 var houseFeatures = features.Select(id => new HouseFeature() { FeatureId = id });
                 foreach (var id in features)
                 {

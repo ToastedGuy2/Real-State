@@ -5,8 +5,8 @@
 }
 
 @section CSS{
-    <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
 }
 
 <div class="container">
@@ -36,14 +36,14 @@
                             @Html.DisplayFor(modelItem => service.Name)
                         </td>
                         <td>
-                            ₡@Html.DisplayFor(modelItem => service.Price)
+                            @service.Price.ToCurrency()
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => service.Description)
                         </td>
                         <td>
                             <a class="btn btn-warning" asp-action="Edit" asp-route-id="@service.ServiceId"><i
-                                    class="far fa-edit"></i>
+                                class="far fa-edit"></i>
                                 Edit</a>
                         </td>
                     </tr>
@@ -53,12 +53,12 @@
     </div>
 </div>
 @section Scripts{
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
 <script src="~/js/Invoices/invoices.js"></script>
 <script src="~/lib/notyf/notyf.min.js"></script>
-    <script src="~/js/service_list.js"></script>
-    @if(TempData["TransactionCompleted"]!=null){
-        <script src="~/js/House/showNotification.js"></script>
-        }
-    <script src="~/js/smallContent.js"></script>
-    }
+<script src="~/js/service_list.js"></script>
+@if(TempData["TransactionCompleted"]!=null){
+<script src="~/js/House/showNotification.js"></script>
+}
+<script src="~/js/smallContent.js"></script>
+}
