@@ -8,42 +8,39 @@
     var roles = await UserManager.GetRolesAsync(loggedUser);
     if (roles.Any(r => r != "Customer"))
     {
-        <li class="nav-item">
-    <a class="nav-link" asp-controller="House" asp-action="List" id="house-link">Houses</a>
-</li>
-        <li class="nav-item">
-    <a class="nav-link" asp-controller="Service" asp-action="List" id="service-link">Services</a>
-</li>
-        <li class="nav-item">
-    <a class="nav-link" asp-controller="Invoice" asp-action="Admin" id="service-link">Invoices</a>
-</li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="House" asp-action="List" id="house-link">Houses</a>
+        </li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="Service" asp-action="List" id="service-link">Services</a>
+        </li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="Invoice" asp-action="Admin" id="service-link">Invoices</a>
+        </li>
     }
     else
     {
-        <li class="nav-item">
-    <a class="nav-link" asp-controller="Invoice" asp-action="Customer" id="service-link">Invoices</a>
-</li>
+                <li class="nav-item">
+            <a class="nav-link" asp-controller="Invoice" asp-action="Customer" id="service-link">Invoices</a>
+        </li>
     }
-    <li class="nav-item">
-    <a class="nav-link" asp-controller="Account" asp-action="Login"><i class="fas fa-user"></i></a>
-</li>
-    <li class="nav-item">
-    <form class="form-inline" asp-controller="Account" asp-action="LogOut"
+        <li class="nav-item">
+        <form class="form-inline" asp-controller="Account" asp-action="LogOut"
         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button type="submit" class="btn  btn-outline-primary btn-rounded my-2 my-sm-0 mx-0 mx-sm-3"
+            <button type="submit" class="btn  btn-outline-primary btn-rounded my-2 my-sm-0 mx-0 mx-sm-3"
             id="log-out-btn">Logout</button>
-    </form>
-</li>
+        </form>
+    </li>
 }
 else
 {
-    <li class="nav-item">
-    <a class="btn btn-rounded my-2 my-sm-0 mx-0 mx-sm-3" asp-controller="Account" asp-action="SignUp"
+        <li class="nav-item">
+        <a class="btn btn-rounded my-2 my-sm-0 mx-0 mx-sm-3" asp-controller="Account" asp-action="SignUp"
         id="sign-up-btn">Sign
-        up</a>
-</li>
-    <li class="nav-item">
-    <a class="btn btn-outline-primary btn-rounded my-2 my-sm-0" asp-controller="Account" asp-action="Login"
+            up</a>
+    </li>
+        <li class="nav-item">
+        <a class="btn btn-outline-primary btn-rounded my-2 my-sm-0" asp-controller="Account" asp-action="Login"
         id="login-btn">Login</a>
-</li>
+    </li>
 }
