@@ -22,19 +22,23 @@
     .card-img-top {
         height: 16vw;
     }
-    .card{
+
+    .card {
         border: 2px solid #fff;
     }
-    .card:hover{
+
+    .card:hover {
         cursor: pointer;
         border: 2px solid #961047;
         background-color: #eee;
     }
-    .card-active{
+
+    .card-active {
         cursor: pointer;
         border: 2px solid #961047;
         background-color: #eee;
-    }}
+    }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -50,14 +54,29 @@
     }
 }
 
-.card-active{
+.card-active {
     border: 2px solid #961047;
     background-color: #eee;
 }
-#home-picture{
+
+#home-picture {
     max-height: 400px;
 }
-#home-details,#home-details-example{
+
+#home-details,
+#home-details-example {
     border: 3px solid #961047;
     border-radius: 0.25rem;
+}
+
+.dropdown-item:hover {
+    cursor: pointer;
+}
+
+#home-details {
+    position: -webkit-sticky;
+    /* Safari & IE */
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }

@@ -1,9 +1,9 @@
 @using Web.Helpers
 @{
-    ViewData["Title"] = "House";
-    Layout = "_RentHouseLayout";
-    var today = DateTime.Now.ToString("yyyy/MM/dd");
-    var next10days = DateTime.Now.AddDays(10).ToString("yyyy/MM/dd");
+  ViewData["Title"] = "House";
+  Layout = "_RentHouseLayout";
+  var today = DateTime.Now.ToString("yyyy/MM/dd");
+  var next10days = DateTime.Now.AddDays(10).ToString("yyyy/MM/dd");
 }
 @section CSS{
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
@@ -41,11 +41,6 @@
             <input type="hidden" asp-for="HouseId">
             <input type="hidden" asp-for="Price">
             <h5 class="text-center fw-bold">Rent Details</h5>
-            @* <div class="form-outline">
-              <i class="far fa-calendar-alt trailing"></i>
-              <input asp-for="From" class="form-control form-icon-trailing" />
-              <label asp-for="From" class="form-label" ></label>
-          </div> *@
             <div class="mt-4">
               <label asp-for="From" class="form-label"></label>
               <input asp-for="From" class="form-control">
@@ -64,14 +59,14 @@
             <hr>
             <h5 class="text-center fw-bold my-4">Services</h5>
             @foreach (var service in Model.ServicesToDisplay)
-            {
-                <div class="form-check">
-                    <input type="checkbox" name="service" value="@service.ServiceId" class="form-check-input" >
-                    <label class="form-check-label" >
-                        @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
-                    </label>
-                </div>
-            }
+                {
+                      <div class="form-check">
+                          <input type="checkbox" name="service" value="@service.ServiceId" class="form-check-input" >
+                          <label class="form-check-label" >
+                      @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
+                          </label>
+                      </div>
+                }
             <hr>
             <div class="text-end"><button type="button" class="btn btn-primary" id="next-btn"><i class="fas fa-arrow-right"></i> Next</button></div>
           </div>
@@ -117,22 +112,6 @@
                     </div>
                   </div>
                 </div>
-            @* <div class="form-outline mt-4">
-                    <input type="text" id="number" class="form-control" />
-                    <label class="form-label" for="number">Card number</label>
-                </div> 
-                <div class="form-outline mt-4">
-                    <input type="text" id="name" class="form-control" />
-                    <label class="form-label" for="name">Name on Card</label>
-                </div>
-                <div class="form-outline mt-4">
-                    <input type="text" id="expiry" class="form-control" />
-                    <label class="form-label" for="expiry">Expiry Date</label>
-                </div>
-                <div class="form-outline mt-4">
-                    <input type="text" id="cvc" class="form-control" />
-                    <label class="form-label" for="cvc">Security Code</label>
-                </div> *@
                 <div class="d-flex justify-content-between">
                   <button type="button" class="mt-4 btn btn-primary" id="previous-btn"><i class="fas fa-arrow-left"></i> Previous</button>
                   <button type="button" class="mt-4 btn btn-success" id="confirmation-btn"><i class="fas fa-check-circle"></i> Confirm Payment</button>
@@ -145,7 +124,7 @@
 
     </div>
 </div>
-    @section Scripts{
+@section Scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
