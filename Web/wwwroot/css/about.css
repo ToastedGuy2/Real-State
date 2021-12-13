@@ -1,13 +1,23 @@
-#about-jumbotron{
+#about-jumbotron {
     background-image: url('../images/About.jpeg');
     height: 200px;
 }
-h1{
+
+h1 {
     font-family: 'Chango', cursive;
     color: black;
 }
-p.definition{
+
+p.definition {
     /* font-family: 'Ranchers', cursive; */
     font-family: 'Montserrat', sans-serif;
     color: black;
+}
+
+
+@media (min-width: 0px) {
+    .my-picture {
+        height: 300px;
+        width: 300px;
+    }
 }
