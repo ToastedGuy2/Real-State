@@ -9,71 +9,73 @@
     <div class="row">
         <h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-file-invoice-dollar"></i></span> <span
                 class="secondary-color">Invoices</span></h1>
-                <table class="table table-hover" id="table">
-                <thead>
-                    <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.House.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Date)
-                        </th>
-                        <th>
-                            Months
-                        </th>
-                        <th>
-                            From
-                        </th>
-                        <th>
-                            To
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Total)
-                        </th>
-                        <th>
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.Count(); i++)
-                {
-                    var invoice = Model.ToArray()[i];
-                    int row = i + 1;
-                            <tr>
-                                <td>
-                            @row
-                                </td>
-                                <td>
-                            @invoice.House.Name
-                                </td>
-                                <td>
-                            @invoice.Date.ToString("dddd, dd MMMM yyyy HH:mm tt")
-                                </td>
-                                                        <td>
-                            @invoice.Months
-                                </td>
-                                                        <td>
-                            @invoice.StartDate.ToString("dddd, dd MMMM yyyy")
-                                </td>
-                                                        <td>
-                            @invoice.EndDate.ToString("dddd, dd MMMM yyyy")
-                                </td>
-                                <td>
-                            @invoice.Total.ToCurrency()
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@invoice.InvoiceId"><i
-                                        class="far fa-eye"></i>
-                                        Details</a>
-                                </td>
-                            </tr>
-                }
-                </tbody>
-            </table>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.House.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                Months
+                            </th>
+                            <th>
+                                From
+                            </th>
+                            <th>
+                                To
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Total)
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        var invoice = Model.ToArray()[i];
+                        int row = i + 1;
+                                    <tr>
+                                        <td>
+                                @row
+                                        </td>
+                                        <td>
+                                @invoice.House.Name
+                                        </td>
+                                        <td>
+                                @invoice.Date.ToString("dddd, dd MMMM yyyy HH:mm tt")
+                                        </td>
+                                                                <td>
+                                @invoice.Months
+                                        </td>
+                                                                <td>
+                                @invoice.StartDate.ToString("dddd, dd MMMM yyyy")
+                                        </td>
+                                                                <td>
+                                @invoice.EndDate.ToString("dddd, dd MMMM yyyy")
+                                        </td>
+                                        <td>
+                                @invoice.Total.ToCurrency()
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@invoice.InvoiceId"><i
+                                            class="far fa-eye"></i>
+                                                Details</a>
+                                        </td>
+                                    </tr>
+                    }
+                    </tbody>
+                                </table>
+                </div>
     </div>
 </div>
 
@@ -85,7 +87,7 @@
     if(TempData["TransactionComplete"]!=null){
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-                swal("Transaction Complete", "You have succesfully rent a house", "success");
+                    swal("Transaction Complete", "You have succesfully rent a house", "success");
     </script>
     }
 }
