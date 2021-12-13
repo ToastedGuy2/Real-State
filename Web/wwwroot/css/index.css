@@ -7,26 +7,32 @@
     background-image: url("../images/hobbit_home.jpg");
     height: 50vh;
 }
-#jumbotron-mask{
+
+#jumbotron-mask {
     background-color: rgba(0, 0, 0, 0.6);
 }
-#search-by-province-btn{
+
+#search-by-province-btn {
     background-color: #961047;
     color: #fff;
 }
+
 #search-by-province-btn:hover,
-#search-by-province-btn:active{
+#search-by-province-btn:active {
     background-color: #790535;
     border-color: #790535;
 }
-.form-select:focus{
+
+.form-select:focus {
     border-color: #961047;
     box-shadow: 0 0 0 0.25rem rgb(150 16 71 / 25%)
 }
-/* hr{
-    background-color: #961047;
-    height: 3px;
-} */
-.testimonial-text{
+
+.testimonial-text {
     color: black;
+}
+
+.testimony-picture {
+    width: 200px;
+    height: 200px;
 }

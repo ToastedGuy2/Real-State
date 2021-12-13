@@ -12,7 +12,8 @@
 <div class="container">
     <div class="row">
         <h1 class="text-center mt-3"><span class="primary-color"><i class="fas fa-home"></i></span> Services</h1>
-        <table class="table table-responsive" id="table">
+        <div class="table-responsive">
+            <table class="table table-hover" id="table">
             <thead>
                 <tr>
                     <th>
@@ -30,26 +31,27 @@
             </thead>
             <tbody>
                 @foreach (var service in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => service.Name)
-                        </td>
-                        <td>
-                            @service.Price.ToCurrency()
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => service.Description)
-                        </td>
-                        <td>
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@service.ServiceId"><i
+                    {
+                            <tr>
+                                <td>
+                                @Html.DisplayFor(modelItem => service.Name)
+                                </td>
+                                <td>
+                                @service.Price.ToCurrency()
+                                </td>
+                                <td>
+                                @Html.DisplayFor(modelItem => service.Description)
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@service.ServiceId"><i
                                 class="far fa-edit"></i>
-                                Edit</a>
-                        </td>
-                    </tr>
-                }
+                                        Edit</a>
+                                </td>
+                            </tr>
+                    }
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 @section Scripts{

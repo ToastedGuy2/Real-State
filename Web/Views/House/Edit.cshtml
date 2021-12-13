@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="~/css/form.css">
 <link rel="stylesheet" href="~/css/crud.css">
 }
-<form asp-action="Edit" enctype="multipart/form-data" class="bg-light mx-auto shadow p-4 border border-2 rounded-3">
+<form asp-action="Edit" enctype="multipart/form-data" class="bg-light mx-auto shadow p-4 border border-2 rounded-3  mb-4">
     <h2 class="text-center secondary-color"><i class="far fa-edit"></i> Edit House</h2>
     <input type="hidden" asp-for="HouseId">
     <input type="hidden" asp-for="ImageName">
@@ -56,19 +56,19 @@
         <label class="form-label">Features (Optional)</label>
         @foreach (var feature in @Model.Features)
         {
-            <div class="form-check ms-2">
+                <div class="form-check ms-2">
                 @if (@Model.SelectedFeatures.Any(s => s.FeatureId == feature.FeatureId))
                 {
-                    <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features" checked>
+                            <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features" checked>
                 }
                 else
                 {
-                    <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features">
+                            <input type="checkbox" value="@feature.FeatureId" class="form-check-input" name="features">
                 }
-                <label class="form-check-label" for="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
                     @feature.Name
-                </label>
-            </div>
+                    </label>
+                </div>
         }
 
     </div>
@@ -76,19 +76,19 @@
         <label class="form-label">Services (Optional)</label>
         @foreach (var service in @Model.Services)
         {
-            <div class="form-check ms-2">
+                <div class="form-check ms-2">
                 @if (@Model.SelectedServices.Any(s => s.ServiceId == service.ServiceId))
                 {
-                    <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services" checked>
+                            <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services" checked>
                 }
                 else
                 {
-                    <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services">
+                            <input type="checkbox" value="@service.ServiceId" class="form-check-input" name="services">
                 }
-                <label class="form-check-label" for="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
                     @service.Name
-                </label>
-            </div>
+                    </label>
+                </div>
         }
 
     </div>
