@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="~/lib/notyf/notyf.min.css">
 }
 <div class="container-fluid">
-    <div class="row my-3">
-            <div id="filter-list" class="d-flex">
+    <div class="row my-3" id='sticky-row'>
+            <div id="filter-list my-3" class="d-flex">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="features" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
                             Features
@@ -17,16 +17,16 @@
                         <ul class="dropdown-menu" aria-labelledby="features">
                             @foreach (var feature in @Model.Features)
                     {
-                                                <form action="">
-                                                    <li>
-                                                        <div class="feature-item dropdown-item">
-                                                            <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" value="@feature.Name" name="feature" />
-                                                                <label class="form-check-label" for="flexCheckDefault"> @feature.Name </label>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </form>
+                                                                        <form action="">
+                                                                            <li>
+                                                                                <div class="feature-item dropdown-item">
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" class="form-check-input" value="@feature.Name" name="feature" />
+                                                                                        <label class="form-check-label" for="flexCheckDefault"> @feature.Name </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                        </form>
                     }
                         </ul>
                     </div>
@@ -39,25 +39,25 @@
                     {
                         if (province.Name != Model.ProvinceToCheck)
                         {
-                                                                    <form action="">
-                                                                        <div class="province-item dropdown-item">
-                                                                            <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input" value="@province.Name" name="province" />
-                                                                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
+                                                                                                                    <form action="">
+                                                                                                                        <div class="province-item dropdown-item">
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input type="checkbox" class="form-check-input" value="@province.Name" name="province" />
+                                                                                                                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </form>
                         }
                         else
                         {
-                                                                    <form action="">
-                                                                        <div class="province-item dropdown-item">
-                                                                            <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input" value="@province.Name" name="province" checked/>
-                                                                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
+                                                                                                                    <form action="">
+                                                                                                                        <div class="province-item dropdown-item">
+                                                                                                                            <div class="form-check">
+                                                                                                                                <input type="checkbox" class="form-check-input" value="@province.Name" name="province" checked/>
+                                                                                                                                <label class="form-check-label" for="flexCheckDefault"> @province.Name </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </form>
                         }
 
                     }
@@ -70,29 +70,29 @@
             <div class="row" id="house-list">
                 @foreach (var house in @Model.Houses)
                 {
-                                    <div class="col-sm-6 col-md-12 col-lg-6 col-xl-4 mb-3">
-                                            <div class="card">
-                                                <img src="~/images/Houses/@house.ImageName" class="card-img-top">
-                                                <div class="card-body">
-                                                    <input type="hidden" name="houseId" value="@house.HouseId">
-                                                    <h2 class="card-title secondary-color mb-2">@house.Price.ToCurrency()</h2>
-                                                    <p class="card-subtitle mb-2 d-flex">
-                                                        <span><i class="fas fa-bed"></i> @house.Bedrooms Bd</span> 
-                                                        <span class="mx-1 mx-md-2"><i class="fas fa-toilet-paper"></i> @house.Bathrooms Ba </span>
-                                                        <span><i class="fas fa-ruler-combined"></i> @house.Size sqft</span>
-                                                    </p>
-                                                    <p class="card-text"> <span><i class="fas fa-search-location"></i> @house.Province.Name</span> </p>
-                                                        <div class="d-flex justify-content-end align-items-center">
-                                                            <div>
-                                                                <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-danger"><i
+                                                            <div class="col-sm-6 col-md-12 col-lg-6 col-xl-4 mb-3">
+                                                                    <div class="card">
+                                                                        <img src="~/images/Houses/@house.ImageName" class="card-img-top">
+                                                                        <div class="card-body">
+                                                                            <input type="hidden" name="houseId" value="@house.HouseId">
+                                                                            <h2 class="card-title secondary-color mb-2">@house.Price.ToCurrency()</h2>
+                                                                            <p class="card-subtitle mb-2 d-flex">
+                                                                                <span><i class="fas fa-bed"></i> @house.Bedrooms Bd</span> 
+                                                                                <span class="mx-1 mx-md-2"><i class="fas fa-toilet-paper"></i> @house.Bathrooms Ba </span>
+                                                                                <span><i class="fas fa-ruler-combined"></i> @house.Size sqft</span>
+                                                                            </p>
+                                                                            <p class="card-text"> <span><i class="fas fa-search-location"></i> @house.Province.Name</span> </p>
+                                                                                <div class="d-flex justify-content-end align-items-center">
+                                                                                    <div>
+                                                                                        <a asp-action="House" asp-route-id="@house.HouseId" class="btn btn-danger"><i
                                                     class="fas fa-truck-moving"></i> Rent</a>
-                                                                <a asp-controller="House" asp-action="Details" asp-route-id="@house.HouseId" class="btn btn-outline-info"><i
+                                                                                        <a asp-controller="House" asp-action="Details" asp-route-id="@house.HouseId" class="btn btn-outline-info"><i
                                                     class="fas fa-info-circle"></i> Info</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
                                                             </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                    </div>
                 }
             </div>
         </div>

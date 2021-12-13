@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "card": "^2.5.4"
+    "card": "^2.5.4",
+    "validatorjs": "^3.22.1"
   }
 }

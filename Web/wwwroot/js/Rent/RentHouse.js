@@ -1,6 +1,6 @@
 // Global Variables
 const Validator = require("../../lib/node_modules/validatorjs");
-
+const valid = require("card-validator");
 let stepper;
 document.addEventListener("DOMContentLoaded", function () {
   stepper = new Stepper(document.querySelector(".bs-stepper"));
@@ -159,54 +159,45 @@ document.getElementById("confirmation-btn").addEventListener("click", (evt) => {
   const name_on_card = document.getElementById("name");
   const expiry_date = document.getElementById("expiry");
   const security_code = document.getElementById("cvc");
+  const number = card_number.value.split(" ").join("");
+  const { isValid, card } = valid.number(number);
+  const is_name_valid = valid.cardholderName(name_on_card.value).isValid;
+  const is_date_valid = valid.expirationDate(expiry_date.value).isValid;
+  const is_cvv_valid = valid.cvv(
+    security_code.value,
+    card ? card.code.size : 3
+  ).isValid;
 
-  data = {
-    card_number: card_number.value,
-    name_on_card: name_on_card.value,
-    expiry_date: expiry_date.value,
-    security_code: security_code.value,
-  };
-  rules = {
-    card_number: "required",
-    name_on_card: "required",
-    expiry_date: "required",
-    security_code: "required",
-  };
-  validation = new Validator(data, rules);
-  if (validation.passes()) {
-    return document.getElementById("rent-form").submit();
-  }
-  //   const get_error = validation.errors.get;
-  const card_number_error = validation.errors.first("card_number");
-  const name_on_card_error = validation.errors.first("name_on_card");
-  const expiry_date_error = validation.errors.first("expiry_date");
-  const security_code_error = validation.errors.first("security_code");
-  if (card_number_error) {
-    card_number.classList.add("is-invalid");
-    card_number.parentElement.querySelector(".invalid-feedback").innerText =
-      card_number_error;
+  if (isValid && is_name_valid && is_date_valid && is_cvv_valid) {
+    document.getElementById("rent-form").submit();
   } else {
-    card_number.classList.remove("is-invalid");
-  }
-  if (name_on_card_error) {
-    name_on_card.classList.add("is-invalid");
-    name_on_card.parentElement.querySelector(".invalid-feedback").innerText =
-      name_on_card_error;
-  } else {
-    name_on_card.classList.remove("is-invalid");
-  }
-  if (expiry_date_error) {
-    expiry_date.classList.add("is-invalid");
-    expiry_date.parentElement.querySelector(".invalid-feedback").innerText =
-      expiry_date_error;
-  } else {
-    expiry_date.classList.remove("is-invalid");
-  }
-  if (security_code_error) {
-    security_code.classList.add("is-invalid");
-    security_code.parentElement.querySelector(".invalid-feedback").innerText =
-      security_code_error;
-  } else {
-    security_code.classList.remove("is-invalid");
+    if (!isValid) {
+      if (!card_number.classList.contains("is-invalid")) {
+        card_number.classList.add("is-invalid");
+      }
+    } else {
+      card_number.classList.remove("is-invalid");
+    }
+    if (!is_name_valid) {
+      if (!name_on_card.classList.contains("is-invalid")) {
+        name_on_card.classList.add("is-invalid");
+      }
+    } else {
+      name_on_card.classList.remove("is-invalid");
+    }
+    if (!is_date_valid) {
+      if (!expiry_date.classList.contains("is-invalid")) {
+        expiry_date.classList.add("is-invalid");
+      }
+    } else {
+      expiry_date.classList.remove("is-invalid");
+    }
+    if (!is_cvv_valid) {
+      if (!security_code.classList.contains("is-invalid")) {
+        security_code.classList.add("is-invalid");
+      }
+    } else {
+      security_code.classList.remove("is-invalid");
+    }
   }
 });

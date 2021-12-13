@@ -41,31 +41,31 @@
             <input type="hidden" asp-for="HouseId">
             <input type="hidden" asp-for="Price">
             <h5 class="text-center fw-bold">Rent Details</h5>
-            <div class="mt-4">
+            <div class="mb-4">
               <label asp-for="From" class="form-label"></label>
               <input asp-for="From" class="form-control">
+            <div class="invalid-feedback" id='from-error-message'></div>
             </div>
-            <span class="text-danger" asp-validation-for="From"></span>
-            <div class="form-outline mt-4">
+            <div class="form-outline mt-3 mb-4">
               <input asp-for="Months" class="form-control" min="1">
               <label asp-for="Months" class="form-label"></label>
+            <div class="invalid-feedback" id='months-error-message'></div>
             </div>
-            <span class="text-danger" asp-validation-for="Months"></span>
-            <div class="form-outline mt-4">
+            <div class="form-outline mt-2 mb-4">
               <input asp-for="To" class="form-control" readonly>
               <label asp-for="To" class="form-label"></label>
+            <div class="invalid-feedback" id='to-error-message'></div>
             </div>
-            <span class="text-danger" asp-validation-for="To"></span>
             <hr>
             <h5 class="text-center fw-bold my-4">Services</h5>
             @foreach (var service in Model.ServicesToDisplay)
                 {
-                      <div class="form-check">
-                          <input type="checkbox" name="service" value="@service.ServiceId" class="form-check-input" >
-                          <label class="form-check-label" >
+                                              <div class="form-check">
+                                                  <input type="checkbox" name="service" value="@service.ServiceId" class="form-check-input" >
+                                                  <label class="form-check-label" >
                       @service.Name <span class="badge rounded-pill bg-warning text-dark">@service.Price.ToCurrency()</span>
-                          </label>
-                      </div>
+                                                  </label>
+                                              </div>
                 }
             <hr>
             <div class="text-end"><button type="button" class="btn btn-primary" id="next-btn"><i class="fas fa-arrow-right"></i> Next</button></div>
@@ -88,27 +88,31 @@
             <!-- Form -->
             <form action="#" method="POST" id="credit-card-form">
 
-                <div class="form-outline mt-4">
+                <div class="form-outline mb-2 mt-4">
                     <i class="far fa-credit-card trailing"></i>
                     <input class="form-control form-icon-trailing" id="number"/>
                     <label class="form-label">Card number</label>
+                    <div class="invalid-feedback" id='to-error-message'>Invalid credit card number</div>
                 </div>
                 <div class="form-outline mt-4">
                     <input type="text" id="name" class="form-control" id="name"/>
                     <label class="form-label" for="name">Name on Card</label>
+                    <div class="invalid-feedback">Invalid name</div>
                 </div>
                 <div class="row">
                   <div class="col-6">
-                <div class="form-outline mt-4">
-                    <input type="text" id="expiry" class="form-control" placeholder="mm/yy"/>
-                    <label class="form-label" for="name">Expiry Date</label>
-                </div>
+                    <div class="form-outline mt-4">
+                        <input type="text" id="expiry" class="form-control" placeholder="mm/yy"/>
+                        <label class="form-label" for="name">Expiry Date</label>
+                        <div class="invalid-feedback">Invalid expiration date</div>
+                    </div>
                   </div>
                   <div class="col-6">
                     <div class="form-outline mt-4">
                         <i class="fas fa-info trailing"></i>
                         <input id="cvc" class="form-control form-icon-trailing" />
                         <label class="form-label">Security Code</label>
+                        <div class="invalid-feedback">Invalid cvv/cdd</div>
                     </div>
                   </div>
                 </div>
@@ -132,5 +136,5 @@
     <script src="https://unpkg.com/currency.js@2.0.3/dist/currency.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <script src="~/lib/node_modules/card/dist/card.js"></script>
-    <script src="~/js/Rent/RentHouse.js"></script>
+    <script src="~/js/Rent/bundle.js"></script>
 }
